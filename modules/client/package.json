@@ -1,10 +1,13 @@
 {
   "name": "rnws-client",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "dist/index.js",
   "author": "Takagi Kensuke <janus.wel.3@gmail.com>",
   "license": "MIT",
   "private": true,
+  "scripts": {
+    "build": "tsc"
+  },
   "dependencies": {
     "rnws-domain": "1.0.0"
   }

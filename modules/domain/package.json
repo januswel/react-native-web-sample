@@ -1,8 +1,13 @@
 {
   "name": "rnws-domain",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "dist/index.js",
   "author": "Takagi Kensuke <janus.wel.3@gmail.com>",
   "license": "MIT",
-  "private": true
+  "private": true,
+  "scripts": {
+    "build": "tsc",
+    "prebuild": "rm -rf dist",
+    "prepare": "yarn build"
+  }
 }
