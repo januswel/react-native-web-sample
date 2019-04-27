@@ -1,4 +1,7 @@
 {
   "private": true,
-  "workspaces": ["modules/*"]
+  "workspaces": ["modules/*"],
+  "devDependencies": {
+    "prettier": "1.17.0"
+  }
 }
