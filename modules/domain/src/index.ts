@@ -1,3 +1,1 @@
-export default () => {
-  console.log('domain')
-}
+export default () => 'domain'

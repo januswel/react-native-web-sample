@@ -3,11 +3,17 @@
   "workspaces": [
     "modules/*"
   ],
+  "scripts": {
+    "test": "jest"
+  },
   "devDependencies": {
+    "@types/jest": "24.0.12",
     "@typescript-eslint/eslint-plugin": "1.7.0",
     "@typescript-eslint/parser": "1.7.0",
     "eslint": "5.16.0",
+    "jest": "24.7.1",
     "prettier": "1.17.0",
+    "ts-jest": "24.0.2",
     "typescript": "3.4.5"
   }
 }
