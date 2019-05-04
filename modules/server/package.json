@@ -13,6 +13,7 @@
     "@januswel/domain": "1.0.0"
   },
   "devDependencies": {
-    "aglio": "2.3.0"
+    "aglio": "2.3.0",
+    "dredd": "11.0.2"
   }
 }
