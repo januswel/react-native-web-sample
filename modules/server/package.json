@@ -6,9 +6,13 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "build": "tsc"
+    "build": "tsc",
+    "doc": "yarn aglio -i todo.apib --server"
   },
   "dependencies": {
     "@januswel/domain": "1.0.0"
+  },
+  "devDependencies": {
+    "aglio": "2.3.0"
   }
 }

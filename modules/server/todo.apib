@@ -1,0 +1,101 @@
+FORMAT: 1A
+HOST: http://localhost:8080/
+
+# Todo API
+
+## Todo Creator [/todo]
+
+### Create a Todo [POST]
+
++ Request (application/json)
+    + Attributes (object)
+        + title (string, required) - A title of the todo
+        + detail (string) - A detail of the todo
+    + Body
+
+            {
+              "title": "write API specs",
+              "detail": "use API Blueprint",
+            }
+
++ Response 201
+
+    [Todo][]
+
+
+## Todo Collection [/todo/{?page,n}]
+
++ Parameters
+    + page: "1" (string) - A page number to retrieve
+    + n: "10" (string) - A number of items per page
+
++ Model (application/json)
+    + Attributes (array[Todo])
+    + Body
+
+            [
+              {
+                "id": "1",
+                "title": "write API specs",
+                "detail": "use API Blueprint",
+                "created_at": "2019-05-04T13:18:47Z",
+                "updated_at": "2019-05-04T15:35:47Z",
+              },
+              ...
+            ]
+
+### Retrieve all Todos [GET]
+
++ Response 200
+
+    [Todo Collection][]
+
+## Todo [/todo/{id}]
+
++ Parameters
+    + id: "1" (string) - The id of the Todo.
+
++ Model (application/json)
+    + Attributes
+        + id (string, required) - An id of the todo
+        + title (string, required) - A title of the todo
+        + detail (string, required) - A detail of the todo
+        + created_at (string, required) - A time that the todo is created
+        + updated_at (string, required) - A time that the todo is updated last
+    + Body
+
+            {
+                "id": "1",
+                "title": "write API specs",
+                "detail": "use API Blueprint",
+                "created_at": "2019-05-04T13:18:47Z",
+                "updated_at": "2019-05-04T15:35:47Z",
+            }
+
+### Retrieve a Todo [GET]
+
++ Response 200
+
+    [Todo][]
+
+### Update a Todo [PATCH]
+
++ Request (application/json)
+    + Attributes (object)
+         + title (string, required) - A title of the todo
+         + detail (string) - A detail of the todo
+    + Body
+
+            {
+              "title": "write API specs",
+              "detail": "use API Blueprint",
+            }
+
++ Response 200
+
+    [Todo][]
+
+### Delete a Todo [DELETE]
+
++ Response 204
+
