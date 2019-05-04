@@ -1,7 +1,7 @@
 {
-  "name": "rnws-server",
+  "name": "@januswel/server",
   "version": "1.0.0",
-  "main": "dist/index.js",
+  "description": "server",
   "author": "Takagi Kensuke <janus.wel.3@gmail.com>",
   "license": "MIT",
   "private": true,
@@ -9,6 +9,6 @@
     "build": "tsc"
   },
   "dependencies": {
-    "rnws-domain": "1.0.0"
+    "@januswel/domain": "1.0.0"
   }
 }

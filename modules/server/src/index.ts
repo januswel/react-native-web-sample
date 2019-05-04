@@ -1,4 +1,4 @@
-import { Todos } from 'rnws-domain'
+import { Todos } from '@januswel/domain'
 
 const todos = Todos.factory([
   {

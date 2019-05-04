@@ -2,9 +2,7 @@
   "extends": "../../tsconfig.json",
   "compilerOptions": {
     "rootDir": "./src",
-    "outDir": "./dist",
-    "jsx": "react"
+    "outDir": "./dist"
   },
-  "references": [{ "path": "../domain" }],
-  "exclude": ["dist", "node_modules", "**/*.test.ts"]
+  "references": [{ "path": "../domain" }]
 }

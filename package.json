@@ -1,10 +1,11 @@
 {
   "private": true,
-  "workspaces": [
-    "modules/*"
-  ],
+  "workspaces": ["modules/*"],
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "clean": "yarn clean:dist && yarn clean:dependencies",
+    "clean:dist": "find modules -name dist -type d | xargs rm -rf",
+    "clean:dependencies": "find modules -name node_modules -type d | xargs rm -rf && rm -rf node_modules"
   },
   "devDependencies": {
     "@types/jest": "24.0.12",
