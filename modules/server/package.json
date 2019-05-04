@@ -12,7 +12,7 @@
     "test": "dredd",
     "prestart": "yarn build",
     "dev": "yarn ts-node-dev src/index.ts",
-    "doc": "yarn aglio -i todo.apib --server"
+    "doc": "aglio -i todo.apib --server"
   },
   "dependencies": {
     "@januswel/domain": "1.0.0",
@@ -20,8 +20,6 @@
   },
   "devDependencies": {
     "@types/express": "4.16.1",
-    "aglio": "2.3.0",
-    "dredd": "11.0.2",
     "ts-node-dev": "1.0.0-pre.35"
   }
 }
