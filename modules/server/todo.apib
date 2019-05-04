@@ -26,8 +26,8 @@ HOST: http://localhost:8080/
 ## Todo Collection [/todo/{?page,n}]
 
 + Parameters
-    + page: "1" (string) - A page number to retrieve
-    + n: "10" (string) - A number of items per page
+    + page: 1 (string) - A page number to retrieve
+    + n: 10 (string) - A number of items per page
 
 + Model (application/json)
     + Attributes (array[Todo])
@@ -53,7 +53,7 @@ HOST: http://localhost:8080/
 ## Todo [/todo/{id}]
 
 + Parameters
-    + id: "1" (string) - The id of the Todo.
+    + id: 1 (string, required) - The id of the Todo.
 
 + Model (application/json)
     + Attributes
