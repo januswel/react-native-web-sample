@@ -9,6 +9,7 @@
     "build": "tsc",
     "prebuild": "rm -rf dist",
     "start": "node dist/index.js",
+    "test": "dredd",
     "prestart": "yarn build",
     "dev": "yarn ts-node-dev src/index.ts",
     "doc": "yarn aglio -i todo.apib --server"
