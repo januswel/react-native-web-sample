@@ -1,6 +1,22 @@
 FORMAT: 1A
 HOST: http://localhost:8080/
 
+# Data Structures
+
+## Todo
+
++ id: `1` (string, required) - An id of the todo
++ title: `write API specs` (string, required) - A title of the todo
++ detail: `use API Blueprint` (string, required) - A detail of the todo
++ createdAt: `YYYY-MM-DDThh:mm:ssZ` (string, required) - A time that the todo is created
++ updatedAt: `YYYY-MM-DDThh:mm:ssZ` (string, required) - A time that the todo is updated last
+
+## TodoParameters
+
++ title: `write API specs` (string, required) - A title of the todo
++ detail: `use API Blueprint` (string) - A detail of the todo
+
+
 # Todo API
 
 ## Todo Creator [/todo]
@@ -8,96 +24,43 @@ HOST: http://localhost:8080/
 ### Create a Todo [POST]
 
 + Request (application/json)
-    + Attributes (object)
-        + title (string, required) - A title of the todo
-        + detail (string) - A detail of the todo
-    + Body
-
-            {
-              "title": "write API specs",
-              "detail": "use API Blueprint"
-            }
+    + Attributes (TodoParameters)
 
 + Response 201
-    + Headers
-        content-type: application/json; charset=utf-8
-
-    [Todo][]
+    + Attributes (Todo)
 
 
 ## Todo Collection [/todo/{?page,n}]
 
 + Parameters
-    + page: 1 (string) - A page number to retrieve
-    + n: 10 (string) - A number of items per page
+    + page: 1 (string, optional) - A page number to retrieve
+    + n: 10 (string, optional) - A number of items per page
 
-+ Model (application/json)
-    + Attributes (array[Todo])
-    + Body
-
-            [
-              {
-                "id": "1",
-                "title": "write API specs",
-                "detail": "use API Blueprint",
-                "createdAt": "2019-05-04T13:18:47Z",
-                "updatedAt": "2019-05-04T15:35:47Z"
-              },
-              ...
-            ]
 
 ### Retrieve all Todos [GET]
 
 + Response 200
+    + Attributes (array[Todo])
 
-    [Todo Collection][]
 
 ## Todo [/todo/{id}]
 
 + Parameters
     + id: 1 (string, required) - The id of the Todo.
 
-+ Model (application/json)
-    + Attributes
-        + id (string, required) - An id of the todo
-        + title (string, required) - A title of the todo
-        + detail (string, required) - A detail of the todo
-        + createdAt (string, required) - A time that the todo is created
-        + updatedAt (string, required) - A time that the todo is updated last
-    + Body
-
-            {
-                "id": "1",
-                "title": "write API specs",
-                "detail": "use API Blueprint",
-                "createdAt": "2019-05-04T13:18:47Z",
-                "updatedAt": "2019-05-04T15:35:47Z"
-            }
-
 ### Retrieve a Todo [GET]
 
 + Response 200
-
-    [Todo][]
+    + Attributes (Todo)
 
 ### Update a Todo [PATCH]
 
 + Request (application/json)
-    + Attributes (object)
-         + title (string, required) - A title of the todo
-         + detail (string) - A detail of the todo
-    + Body
-
-            {
-              "title": "write API specs",
-              "detail": "use API Blueprint"
-            }
+    + Attributes (TodoParameters)
 
 + Response 200
-
-    [Todo][]
+    + Attributes (Todo)
 
 ### Delete a Todo [DELETE]
 
 + Response 204
-
