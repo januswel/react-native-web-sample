@@ -3,18 +3,19 @@ import * as bodyParser from 'body-parser'
 
 import todoRouter from './routers/todo'
 import healthCheckRouter from './routers/health-check'
-import errorHandler from './handlers/error'
-import notFoundHandler from './handlers/404'
+import * as Middlewares from './middlewares'
 
 const app = Express()
 
 app.use(bodyParser.json())
 
+app.use(Middlewares.accessLogger)
+
 app.use('/todo', todoRouter)
 app.use('/', healthCheckRouter)
 
-app.use(notFoundHandler)
-app.use(errorHandler)
+app.use(Middlewares.internalServerErrorHandler)
+app.use(Middlewares.notFoundHandler)
 
 const port = process.env.PORT || 8080
 
