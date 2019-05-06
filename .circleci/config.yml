@@ -12,20 +12,25 @@ jobs:
             - v1-dependencies-{{ checksum "package.json" }}
             - v1-dependencies-
       - run: yarn install
-      - save_cache:
-          paths:
-            - node_modules
-          key: v1-dependencies-{{ checksum "package.json" }}
       - run:
           command: |
             cd modules/domain
             yarn build
+      - save_cache:
+          paths:
+            - node_modules
+            - modules/domain/dist
+          key: v1-dependencies-{{ checksum "package.json" }}
   test:
     docker:
       - image: circleci/node:10.15
     working_directory: ~/repo
     steps:
       - checkout
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "package.json" }}
+            - v1-dependencies-
       - run: yarn test
   test-server:
     docker:
@@ -33,6 +38,10 @@ jobs:
     working_directory: ~/repo
     steps:
       - checkout
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "package.json" }}
+            - v1-dependencies-
       - run: sudo yarn global add dredd@11.0.2
       - run:
           command: |
