@@ -31,6 +31,3 @@ export const update = (todos: Entity, id: number, values: Todo.Values): Entity =
     return item
   })
 }
-
-// utilities
-export const has = (todos: Entity, id: number): boolean => todos.find(todo => todo.id === id) != null
