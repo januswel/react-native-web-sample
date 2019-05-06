@@ -15,10 +15,12 @@ HOST: http://localhost:8080/
 
             {
               "title": "write API specs",
-              "detail": "use API Blueprint",
+              "detail": "use API Blueprint"
             }
 
 + Response 201
+    + Headers
+        content-type: application/json; charset=utf-8
 
     [Todo][]
 
@@ -38,8 +40,8 @@ HOST: http://localhost:8080/
                 "id": "1",
                 "title": "write API specs",
                 "detail": "use API Blueprint",
-                "created_at": "2019-05-04T13:18:47Z",
-                "updated_at": "2019-05-04T15:35:47Z",
+                "createdAt": "2019-05-04T13:18:47Z",
+                "updatedAt": "2019-05-04T15:35:47Z"
               },
               ...
             ]
@@ -60,16 +62,16 @@ HOST: http://localhost:8080/
         + id (string, required) - An id of the todo
         + title (string, required) - A title of the todo
         + detail (string, required) - A detail of the todo
-        + created_at (string, required) - A time that the todo is created
-        + updated_at (string, required) - A time that the todo is updated last
+        + createdAt (string, required) - A time that the todo is created
+        + updatedAt (string, required) - A time that the todo is updated last
     + Body
 
             {
                 "id": "1",
                 "title": "write API specs",
                 "detail": "use API Blueprint",
-                "created_at": "2019-05-04T13:18:47Z",
-                "updated_at": "2019-05-04T15:35:47Z",
+                "createdAt": "2019-05-04T13:18:47Z",
+                "updatedAt": "2019-05-04T15:35:47Z"
             }
 
 ### Retrieve a Todo [GET]
@@ -88,7 +90,7 @@ HOST: http://localhost:8080/
 
             {
               "title": "write API specs",
-              "detail": "use API Blueprint",
+              "detail": "use API Blueprint"
             }
 
 + Response 200

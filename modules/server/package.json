@@ -6,11 +6,11 @@
   "license": "MIT",
   "private": true,
   "scripts": {
+    "start": "node dist/index.js",
+    "prestart": "yarn build",
     "build": "tsc",
     "prebuild": "rm -rf dist",
-    "start": "node dist/index.js",
     "test": "dredd",
-    "prestart": "yarn build",
     "dev": "yarn ts-node-dev src/index.ts",
     "doc": "aglio -i todo.apib --server"
   },
