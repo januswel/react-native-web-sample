@@ -7,16 +7,16 @@ describe('Todos', () => {
       const todos = Todos.factory([
         {
           title: 'setup Jest',
-          content: 'install jest, ts-jest, @type/jest',
+          detail: 'install jest, ts-jest, @type/jest',
         },
         {
           title: 'write tests',
-          content: 'see Jest documents',
+          detail: 'see Jest documents',
         },
       ])
       expect(todos.length).toBe(2)
       expect(todos[0].title).toBe('setup Jest')
-      expect(todos[1].content).toBe('see Jest documents')
+      expect(todos[1].detail).toBe('see Jest documents')
     })
   })
   describe('add', () => {
@@ -24,11 +24,11 @@ describe('Todos', () => {
       const todos = Todos.factory([
         {
           title: '1',
-          content: 'sample',
+          detail: 'sample',
         },
         {
           title: '2',
-          content: 'sample',
+          detail: 'sample',
         },
       ])
       expect(todos.length).toBe(2)
@@ -41,11 +41,11 @@ describe('Todos', () => {
       const todos = Todos.factory([
         {
           title: '1',
-          content: 'sample',
+          detail: 'sample',
         },
         {
           title: '2',
-          content: 'sample',
+          detail: 'sample',
         },
       ])
       expect(todos.length).toBe(2)
@@ -58,20 +58,20 @@ describe('Todos', () => {
       const todos = Todos.factory([
         {
           title: '1',
-          content: 'sample',
+          detail: 'sample',
         },
         {
           title: '2',
-          content: 'sample',
+          detail: 'sample',
         },
       ])
       expect(todos[0].title).toBe('1')
       const updated = Todos.update(todos, todos[0].id, {
         title: 'updated',
-        content: todos[0].content,
+        detail: todos[0].detail,
       })
       expect(updated[0].title).toBe('updated')
-      expect(updated[0].content).toBe('sample')
+      expect(updated[0].detail).toBe('sample')
     })
   })
 })

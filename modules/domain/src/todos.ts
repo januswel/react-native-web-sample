@@ -3,7 +3,7 @@ import * as Todo from './todo'
 export type Entity = Array<Todo.Entity>
 type Seeds = Array<Todo.Values>
 
-export const factory = (seeds: Seeds) => seeds.map(seed => Todo.factory(seed.title, seed.content))
+export const factory = (seeds: Seeds) => seeds.map(seed => Todo.factory(seed.title, seed.detail))
 export const add = (todos: Entity, todo: Todo.Entity) => {
   if (0 < todos.filter(item => item.id === todo.id).length) {
     throw new Error(`id ${todo.id} todo is already exists`)

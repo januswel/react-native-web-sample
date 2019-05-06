@@ -6,7 +6,7 @@ describe('Todo', () => {
       const todo = Todo.factory('try RNW', 'implement app with react-native-web')
       expect(todo.id).toBe(1)
       expect(todo.title).toBe('try RNW')
-      expect(todo.content).toBe('implement app with react-native-web')
+      expect(todo.detail).toBe('implement app with react-native-web')
     })
   })
   describe('change', () => {
@@ -15,10 +15,10 @@ describe('Todo', () => {
       expect(todo.title).toBe('abcde')
       const changed = Todo.change(todo, {
         title: 'changed',
-        content: 'changed',
+        detail: 'changed',
       })
       expect(changed.title).toBe('changed')
-      expect(changed.content).toBe('changed')
+      expect(changed.detail).toBe('changed')
     })
   })
   describe('changeTitle', () => {
@@ -30,11 +30,11 @@ describe('Todo', () => {
     })
   })
   describe('changeContent', () => {
-    it('returns Todo instances that content is changed to specified', () => {
+    it('returns Todo instances that detail is changed to specified', () => {
       const todo = Todo.factory('', 'this is sample')
-      expect(todo.content).toBe('this is sample')
+      expect(todo.detail).toBe('this is sample')
       const changed = Todo.changeContent(todo, 'changed')
-      expect(changed.content).toBe('changed')
+      expect(changed.detail).toBe('changed')
     })
   })
 })
