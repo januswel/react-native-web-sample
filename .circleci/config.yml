@@ -9,8 +9,8 @@ jobs:
       - checkout
       - restore_cache:
           keys:
-            - v2-dependencies-{{ checksum "package.json" }}
-            - v2-dependencies-
+            - v3-dependencies-{{ checksum "package.json" }}
+            - v3-dependencies-
       - run:
           command: |
             rm -f modules/domain/tsconfig.tsbuildinfo
@@ -21,8 +21,7 @@ jobs:
             - modules/domain/node_modules
             - modules/server/node_modules
             - modules/client/node_modules
-            - modules/domain/dist
-          key: v2-dependencies-{{ checksum "package.json" }}
+          key: v3-dependencies-{{ checksum "package.json" }}
   test:
     docker:
       - image: circleci/node:10.15
@@ -31,8 +30,8 @@ jobs:
       - checkout
       - restore_cache:
           keys:
-            - v2-dependencies-{{ checksum "package.json" }}
-            - v2-dependencies-
+            - v3-dependencies-{{ checksum "package.json" }}
+            - v3-dependencies-
       - run: yarn test
   test-server:
     docker:
@@ -42,8 +41,8 @@ jobs:
       - checkout
       - restore_cache:
           keys:
-            - v2-dependencies-{{ checksum "package.json" }}
-            - v2-dependencies-
+            - v3-dependencies-{{ checksum "package.json" }}
+            - v3-dependencies-
       - run: sudo yarn global add dredd@11.0.2
       - run:
           command: |
