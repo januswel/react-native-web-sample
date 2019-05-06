@@ -21,17 +21,23 @@ jobs:
             cd modules/domain
             yarn build
   test:
-    - run: yarn test
+    docker:
+      - image: circleci/<language>:<version TAG>
+    steps:
+      - run: yarn test
   test-server:
-    - run: sudo yarn global add dredd@11.0.2
-    - run:
-        command: |
-          cd modules/server
-          yarn test
+    docker:
+      - image: circleci/<language>:<version TAG>
+    steps:
+      - run: sudo yarn global add dredd@11.0.2
+      - run:
+          command: |
+            cd modules/server
+            yarn test
 
 workflows:
   version: 2
-  test:
+  test-all:
     jobs:
       - test:
           requires:
