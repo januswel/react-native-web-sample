@@ -1,16 +1,14 @@
 import * as Express from 'express'
 
 import todoRouter from './routers/todo'
+import healthCheckRouter from './routers/health-check'
 import errorHandler from './handlers/error'
 import notFoundHandler from './handlers/404'
 
 const app = Express()
 
 app.use('/todo', todoRouter)
-
-app.get('/', (_: Express.Request, res: Express.Response) => {
-  res.send('Hello World!')
-})
+app.use('/', healthCheckRouter)
 
 app.use(notFoundHandler)
 app.use(errorHandler)
