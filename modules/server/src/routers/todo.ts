@@ -46,9 +46,16 @@ router.patch('/:id', (_: Express.Request, res: Express.Response) => {
   res.sendStatus(200)
 })
 
-router.delete('/:id', (_: Express.Request, res: Express.Response) => {
-  // TODO
-  res.sendStatus(200)
+router.delete('/:id', (req: Express.Request, res: Express.Response) => {
+  const id = req.params.id
+
+  if (Todos.has(todos, id)) {
+    res.sendStatus(400)
+  }
+
+  todos = Todos.remove(todos, id)
+
+  res.sendStatus(204)
 })
 
 export default router
