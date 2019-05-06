@@ -25,12 +25,14 @@ jobs:
       - image: circleci/node:10.15
     working_directory: ~/repo
     steps:
+      - checkout
       - run: yarn test
   test-server:
     docker:
       - image: circleci/node:10.15
     working_directory: ~/repo
     steps:
+      - checkout
       - run: sudo yarn global add dredd@11.0.2
       - run:
           command: |
