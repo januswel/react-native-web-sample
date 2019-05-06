@@ -22,12 +22,12 @@ jobs:
             yarn build
   test:
     docker:
-      - image: circleci/<language>:<version TAG>
+      - image: circleci/node:10.15
     steps:
       - run: yarn test
   test-server:
     docker:
-      - image: circleci/<language>:<version TAG>
+      - image: circleci/node:10.15
     steps:
       - run: sudo yarn global add dredd@11.0.2
       - run:
