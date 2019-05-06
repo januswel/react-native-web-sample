@@ -11,11 +11,10 @@ jobs:
           keys:
             - v2-dependencies-{{ checksum "package.json" }}
             - v2-dependencies-
-      - run: yarn install
       - run:
           command: |
-            cd modules/domain
-            yarn build
+            rm -f modules/domain/tsconfig.tsbuildinfo
+            yarn install
       - save_cache:
           paths:
             - node_modules
