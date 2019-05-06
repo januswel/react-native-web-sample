@@ -11,10 +11,7 @@ jobs:
           keys:
             - v3-dependencies-{{ checksum "package.json" }}
             - v3-dependencies-
-      - run:
-          command: |
-            rm -f modules/domain/tsconfig.tsbuildinfo
-            yarn install
+      - run: yarn
       - save_cache:
           paths:
             - node_modules
@@ -43,6 +40,10 @@ jobs:
           keys:
             - v3-dependencies-{{ checksum "package.json" }}
             - v3-dependencies-
+      - run:
+          command: |
+            cd modules/domain
+            yarn build
       - run: sudo yarn global add dredd@11.0.2
       - run:
           command: |
