@@ -1,0 +1,66 @@
+FORMAT: 1A
+HOST: http://localhost:8080/
+
+# Data Structures
+
+## Todo
+
++ id: `1` (string, required) - An id of the todo
++ title: `write API specs` (string, required) - A title of the todo
++ detail: `use API Blueprint` (string, required) - A detail of the todo
++ createdAt: `YYYY-MM-DDThh:mm:ssZ` (string, required) - A time that the todo is created
++ updatedAt: `YYYY-MM-DDThh:mm:ssZ` (string, required) - A time that the todo is updated last
+
+## TodoParameters
+
++ title: `write API specs` (string, required) - A title of the todo
++ detail: `use API Blueprint` (string) - A detail of the todo
+
+
+# Todo API
+
+## Todo Creator [/todo]
+
+### Create a Todo [POST]
+
++ Request (application/json)
+    + Attributes (TodoParameters)
+
++ Response 201
+    + Attributes (Todo)
+
+
+## Todo Collection [/todo/{?page,n}]
+
++ Parameters
+    + page: 1 (string, optional) - A page number to retrieve
+    + n: 10 (string, optional) - A number of items per page
+
+
+### Retrieve all Todos [GET]
+
++ Response 200
+    + Attributes (array[Todo])
+
+
+## Todo [/todo/{id}]
+
++ Parameters
+    + id: 1 (string, required) - The id of the Todo.
+
+### Retrieve a Todo [GET]
+
++ Response 200
+    + Attributes (Todo)
+
+### Update a Todo [PATCH]
+
++ Request (application/json)
+    + Attributes (TodoParameters)
+
++ Response 200
+    + Attributes (Todo)
+
+### Delete a Todo [DELETE]
+
++ Response 204

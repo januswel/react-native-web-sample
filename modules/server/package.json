@@ -6,9 +6,20 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "build": "tsc"
+    "start": "node dist/index.js",
+    "prestart": "yarn build",
+    "build": "tsc",
+    "prebuild": "rm -rf dist",
+    "test": "dredd",
+    "dev": "yarn ts-node-dev src/index.ts",
+    "doc": "aglio -i todo.apib --server"
   },
   "dependencies": {
-    "@januswel/domain": "1.0.0"
+    "@januswel/domain": "1.0.0",
+    "express": "4.16.4"
+  },
+  "devDependencies": {
+    "@types/express": "4.16.1",
+    "ts-node-dev": "1.0.0-pre.35"
   }
 }

@@ -1,77 +1,111 @@
 import * as Todo from './todo'
 import * as Todos from './todos'
 
+const TODOS = Todos.factory([
+  {
+    title: '1',
+    detail: 'sample',
+  },
+  {
+    title: '2',
+    detail: 'sample',
+  },
+  {
+    title: '3',
+    detail: 'sample',
+  },
+])
+
 describe('Todos', () => {
   describe('factory', () => {
     it('returns array of Todo', () => {
-      const todos = Todos.factory([
-        {
-          title: 'setup Jest',
-          content: 'install jest, ts-jest, @type/jest',
-        },
-        {
-          title: 'write tests',
-          content: 'see Jest documents',
-        },
-      ])
-      expect(todos.length).toBe(2)
-      expect(todos[0].title).toBe('setup Jest')
-      expect(todos[1].content).toBe('see Jest documents')
+      const timeExpected = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z$/
+
+      expect(TODOS.length).toBe(3)
+
+      const actual = TODOS[0]
+      expect(actual.title).toBe('1')
+      expect(actual.detail).toBe('sample')
+      expect(actual.createdAt).toEqual(expect.stringMatching(timeExpected))
+      expect(() => new Date(actual.createdAt)).not.toThrow()
+      expect(actual.updatedAt).toEqual(expect.stringMatching(timeExpected))
+      expect(() => new Date(actual.updatedAt)).not.toThrow()
     })
   })
+
   describe('add', () => {
     it('returns array that has specified one in last', () => {
-      const todos = Todos.factory([
-        {
-          title: '1',
-          content: 'sample',
-        },
-        {
-          title: '2',
-          content: 'sample',
-        },
-      ])
-      expect(todos.length).toBe(2)
-      const added = Todos.add(todos, Todo.factory('3', 'sample'))
-      expect(added.length).toBe(3)
+      expect(TODOS.length).toBe(3)
+      const added = Todos.add(TODOS, Todo.factory('4', 'sample'))
+      expect(added.length).toBe(4)
+    })
+    it('throws error if specified id is existing already', () => {
+      expect(() => {
+        Todos.add(TODOS, TODOS[0])
+      }).toThrow()
     })
   })
+
+  describe('slice', () => {
+    it('returns an array of Todo that has specified range', () => {
+      const one = Todos.slice(TODOS, 0, 1)
+      expect(one.length).toBe(1)
+      expect(one[0].title).toBe('1')
+
+      const oneTwo = Todos.slice(TODOS, 0, 2)
+      expect(oneTwo.length).toBe(2)
+      expect(oneTwo[1].title).toBe('2')
+
+      const two = Todos.slice(TODOS, 1, 2)
+      expect(two.length).toBe(1)
+      expect(two[0].title).toBe('2')
+
+      const twoThree = Todos.slice(TODOS, 1, 3)
+      expect(twoThree.length).toBe(2)
+      expect(twoThree[1].title).toBe('3')
+    })
+  })
+
+  describe('get', () => {
+    it('returns specified Todo', () => {
+      const todo = Todos.get(TODOS, 2)
+      expect(todo.title).toBe('2')
+    })
+    it('throws error if specified id is not found', () => {
+      expect(() => {
+        Todos.get(TODOS, 5)
+      }).toThrow()
+      expect(() => {
+        Todos.get(TODOS, -3)
+      }).toThrow()
+    })
+  })
+
   describe('remove', () => {
     it('returns array that todo with specified id is removed', () => {
-      const todos = Todos.factory([
-        {
-          title: '1',
-          content: 'sample',
-        },
-        {
-          title: '2',
-          content: 'sample',
-        },
-      ])
-      expect(todos.length).toBe(2)
-      const removed = Todos.remove(todos, todos[0].id)
-      expect(removed.length).toBe(1)
+      expect(TODOS.length).toBe(3)
+      const removed = Todos.remove(TODOS, TODOS[0].id)
+      expect(removed.length).toBe(2)
     })
   })
+
   describe('update', () => {
     it('returns array that has changed attributes with specified values', () => {
-      const todos = Todos.factory([
-        {
-          title: '1',
-          content: 'sample',
-        },
-        {
-          title: '2',
-          content: 'sample',
-        },
-      ])
-      expect(todos[0].title).toBe('1')
-      const updated = Todos.update(todos, todos[0].id, {
+      expect(TODOS[0].title).toBe('1')
+      const updated = Todos.update(TODOS, TODOS[0].id, {
         title: 'updated',
-        content: todos[0].content,
+        detail: TODOS[0].detail,
       })
       expect(updated[0].title).toBe('updated')
-      expect(updated[0].content).toBe('sample')
+      expect(updated[0].detail).toBe('sample')
+    })
+    it('throws error if specified id is not found', () => {
+      expect(() => {
+        Todos.update(TODOS, 11, { title: 'this throw errors', detail: '' })
+      }).toThrow()
+      expect(() => {
+        Todos.update(TODOS, -1, { title: 'this throw errors', detail: '' })
+      }).toThrow()
     })
   })
 })

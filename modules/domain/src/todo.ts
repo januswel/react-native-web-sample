@@ -1,33 +1,52 @@
 export interface Entity {
   readonly id: number
   readonly title: string
-  readonly content: string
+  readonly detail: string
+  readonly createdAt: string
+  readonly updatedAt: string
 }
 
 export interface Values {
   readonly title: string
-  readonly content: string
+  readonly detail: string
 }
 
 let number = 0
 
-export const factory = (title: string, content: string): Entity => ({
-  id: ++number,
-  title,
-  content,
-})
+export const factory = (title: string, detail: string): Entity => {
+  const now = new Date()
+  return {
+    id: ++number,
+    title,
+    detail,
+    createdAt: now.toISOString(),
+    updatedAt: now.toISOString(),
+  }
+}
 
-export const change = (todo: Entity, values: Values): Entity => ({
-  ...todo,
-  ...values,
-})
+export const change = (todo: Entity, values: Values): Entity => {
+  const now = new Date()
+  return {
+    ...todo,
+    ...values,
+    updatedAt: now.toISOString(),
+  }
+}
 
-export const changeTitle = (todo: Entity, title: string): Entity => ({
-  ...todo,
-  title,
-})
+export const changeTitle = (todo: Entity, title: string): Entity => {
+  const now = new Date()
+  return {
+    ...todo,
+    title,
+    updatedAt: now.toISOString(),
+  }
+}
 
-export const changeContent = (todo: Entity, content: string): Entity => ({
-  ...todo,
-  content,
-})
+export const changeContent = (todo: Entity, detail: string): Entity => {
+  const now = new Date()
+  return {
+    ...todo,
+    detail,
+    updatedAt: now.toISOString(),
+  }
+}
