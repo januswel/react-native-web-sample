@@ -3,10 +3,8 @@
   "workspaces": ["modules/*"],
   "scripts": {
     "test": "jest",
-    "clean": "yarn clean:dist && yarn clean:dependencies && yarn clean:tsc",
-    "clean:dist": "find modules -name dist -type d | xargs rm -rf",
-    "clean:dependencies": "find modules -name node_modules -type d | xargs rm -rf && rm -rf node_modules",
-    "clean:tsc": "find modules -name tsconfig.tsbuildinfo -type d | xargs rm -rf"
+    "clean": "git clean -Xdf",
+    "postinstall": "cd modules/domain && yarn build"
   },
   "devDependencies": {
     "@types/jest": "24.0.12",
