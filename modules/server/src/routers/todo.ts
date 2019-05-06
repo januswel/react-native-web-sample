@@ -3,22 +3,31 @@ import { Todo, Todos } from '@januswel/domain'
 
 const router = Express.Router()
 
-const todos = Todos.factory([])
+let todos = Todos.factory([])
 
 router.post('/', (req: Express.Request, res: Express.Response) => {
   const { title, detail } = req.body
-  const result = Todo.factory(title, detail)
-  todos.push(result)
-  res.status(201).json(result)
+  const todo = Todo.factory(title, detail)
+  todos = Todos.add(todos, todo)
+  res.status(201).json(todo)
 })
+
+const calcurateRange = (page: number, n: number) => {
+  const begin = (page - 1) * n
+  const end = page * n - 1
+
+  return {
+    begin,
+    end,
+  }
+}
 
 router.get('/', (req: Express.Request, res: Express.Response) => {
   const page = req.query.page || 1
   const n = req.query.n || 10
 
-  const begin = (page - 1) * n
-  const end = page * n - 1
-  const result = todos.slice(begin, end)
+  const { begin, end } = calcurateRange(page, n)
+  const result = Todos.slice(todos, begin, end)
 
   if (result.length === 0) {
     res.sendStatus(404)
