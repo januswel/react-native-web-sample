@@ -48,9 +48,16 @@ router.get('/:id', (req: Express.Request, res: Express.Response) => {
   }
 })
 
-router.patch('/:id', (_: Express.Request, res: Express.Response) => {
-  // TODO
-  res.sendStatus(200)
+router.patch('/:id', (req: Express.Request, res: Express.Response) => {
+  const id = parseInt(req.params.id, 10)
+  const { title, detail } = req.body
+
+  try {
+    todos = Todos.update(todos, id, { title, detail })
+    res.status(200).json(Todos.get(todos, id))
+  } catch (e) {
+    res.sendStatus(400)
+  }
 })
 
 router.delete('/:id', (req: Express.Request, res: Express.Response) => {
