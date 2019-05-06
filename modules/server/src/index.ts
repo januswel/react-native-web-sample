@@ -1,24 +1,16 @@
 import * as Express from 'express'
 
-const app = Express()
+import errorHandler from './handlers/error'
+import notFoundHandler from './handlers/404'
 
-app.use((err: Error, _: Express.Request, res: Express.Response, __: Express.NextFunction) => {
-  console.error(err.stack)
-  res.status(500).send('Internal Server Error')
-})
+const app = Express()
 
 app.get('/', (_: Express.Request, res: Express.Response) => {
   res.send('Hello World!')
 })
 
-app.use((err: Error, _: Express.Request, res: Express.Response, __: Express.NextFunction) => {
-  console.error(err.stack)
-  res.status(500).send('500 Internal Server Error')
-})
-
-app.use((_: Express.Request, res: Express.Response, __: Express.NextFunction) => {
-  res.status(404).send('404 Not Found')
-})
+app.use(notFoundHandler)
+app.use(errorHandler)
 
 app.listen(3000, () => {
   console.log('Example app listening on port 3000!')
