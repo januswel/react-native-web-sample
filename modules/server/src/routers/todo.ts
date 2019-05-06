@@ -31,14 +31,21 @@ router.get('/', (req: Express.Request, res: Express.Response) => {
 
   if (result.length === 0) {
     res.sendStatus(404)
+    return
   }
 
   res.status(200).json(result)
 })
 
-router.get('/:id', (_: Express.Request, res: Express.Response) => {
-  // TODO
-  res.sendStatus(200)
+router.get('/:id', (req: Express.Request, res: Express.Response) => {
+  const { id } = req.params
+
+  try {
+    const result = Todos.get(todos, id)
+    res.status(200).json(result)
+  } catch (e) {
+    res.sendStatus(404)
+  }
 })
 
 router.patch('/:id', (_: Express.Request, res: Express.Response) => {
@@ -47,12 +54,7 @@ router.patch('/:id', (_: Express.Request, res: Express.Response) => {
 })
 
 router.delete('/:id', (req: Express.Request, res: Express.Response) => {
-  const id = req.params.id
-
-  if (Todos.has(todos, id)) {
-    res.sendStatus(400)
-  }
-
+  const { id } = req.params
   todos = Todos.remove(todos, id)
 
   res.sendStatus(204)
