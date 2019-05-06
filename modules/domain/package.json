@@ -2,11 +2,11 @@
   "name": "@januswel/domain",
   "version": "1.0.0",
   "description": "domain",
-  "main": "dist/index.js",
-  "typings": "dist/index.d.ts",
   "author": "Takagi Kensuke <janus.wel.3@gmail.com>",
   "license": "MIT",
   "private": true,
+  "main": "dist/index.js",
+  "typings": "dist/index.d.ts",
   "scripts": {
     "build": "tsc",
     "prebuild": "rm -rf dist",

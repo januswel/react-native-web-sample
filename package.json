@@ -1,4 +1,9 @@
 {
+  "name": "react-native-web-sample",
+  "version": "1.0.0",
+  "description": "sample repo for react-native-web",
+  "author": "Takagi Kensuke <janus.wel.3@gmail.com>",
+  "license": "MIT",
   "private": true,
   "workspaces": ["modules/*"],
   "scripts": {
