@@ -38,7 +38,7 @@ router.get('/', (req: Express.Request, res: Express.Response) => {
 })
 
 router.get('/:id', (req: Express.Request, res: Express.Response) => {
-  const { id } = req.params
+  const id = parseInt(req.params.id, 10)
 
   try {
     const result = Todos.get(todos, id)
@@ -54,7 +54,7 @@ router.patch('/:id', (_: Express.Request, res: Express.Response) => {
 })
 
 router.delete('/:id', (req: Express.Request, res: Express.Response) => {
-  const { id } = req.params
+  const id = parseInt(req.params.id, 10)
   todos = Todos.remove(todos, id)
 
   res.sendStatus(204)
