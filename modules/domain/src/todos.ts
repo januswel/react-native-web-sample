@@ -19,9 +19,11 @@ export const get = (todos: Entity, id: number): Todo.Entity => {
   return result
 }
 export const remove = (todos: Entity, id: number): Entity => todos.filter(todo => todo.id !== id)
+
+const NOT_FOUND = -1
 export const update = (todos: Entity, id: number, values: Todo.Values): Entity => {
   const targetIndex = todos.findIndex(item => item.id === id)
-  if (targetIndex == -1) {
+  if (targetIndex === NOT_FOUND) {
     throw new Error(`todo with specified id ${id} is not found`)
   }
   return todos.map((item, index) => {

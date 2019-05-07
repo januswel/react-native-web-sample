@@ -5,9 +5,13 @@
   "author": "Takagi Kensuke <janus.wel.3@gmail.com>",
   "license": "MIT",
   "private": true,
-  "workspaces": ["modules/*"],
+  "workspaces": [
+    "modules/*"
+  ],
   "scripts": {
-    "test": "jest",
+    "test": "yarn test:lint && yarn test:spec",
+    "test:lint": "eslint **/*.ts",
+    "test:spec": "jest",
     "clean": "git clean -Xdf",
     "postinstall": "cd modules/domain && yarn build"
   },
@@ -16,6 +20,7 @@
     "@typescript-eslint/eslint-plugin": "1.7.0",
     "@typescript-eslint/parser": "1.7.0",
     "eslint": "5.16.0",
+    "eslint-plugin-jest": "22.5.1",
     "jest": "24.7.1",
     "prettier": "1.17.0",
     "ts-jest": "24.0.2",

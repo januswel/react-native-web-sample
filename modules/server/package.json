@@ -11,14 +11,16 @@
     "build": "tsc",
     "prebuild": "rm -rf dist",
     "test": "dredd",
-    "dev": "yarn ts-node-dev src/index.ts",
+    "dev": "DEBUG=app* yarn ts-node-dev src/index.ts",
     "doc": "aglio -i todo.apib --server"
   },
   "dependencies": {
     "@januswel/domain": "1.0.0",
+    "debug": "4.1.1",
     "express": "4.16.4"
   },
   "devDependencies": {
+    "@types/debug": "4.1.4",
     "@types/express": "4.16.1",
     "ts-node-dev": "1.0.0-pre.35"
   }
