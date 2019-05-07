@@ -1,3 +1,5 @@
+/* eslint no-magic-numbers: off */
+
 import * as Todo from './todo'
 import * as Todos from './todos'
 
@@ -19,11 +21,11 @@ const TODOS = Todos.factory([
 describe('Todos', () => {
   describe('factory', () => {
     it('returns array of Todo', () => {
-      const timeExpected = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z$/
+      const timeExpected = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z$/u
 
       expect(TODOS.length).toBe(3)
 
-      const actual = TODOS[0]
+      const [actual] = TODOS
       expect(actual.title).toBe('1')
       expect(actual.detail).toBe('sample')
       expect(actual.createdAt).toEqual(expect.stringMatching(timeExpected))

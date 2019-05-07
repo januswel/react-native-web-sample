@@ -1,9 +1,11 @@
+/* eslint no-magic-numbers: off */
+
 import * as Todo from './todo'
 
 describe('Todo', () => {
   describe('factory', () => {
     it('returns Todo instances', () => {
-      const timeExpected = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z$/
+      const timeExpected = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z$/u
 
       const todo = Todo.factory('try RNW', 'implement app with react-native-web')
 
