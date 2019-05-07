@@ -3,12 +3,14 @@ import { Todos } from '@januswel/domain'
 const todos = Todos.factory([
   {
     title: 'use RNW',
-    content: 'setup react-native-web',
+    detail: 'setup react-native-web',
   },
   {
     title: 'build Todo app',
-    content: 'implement client',
+    detail: 'implement client',
   },
 ])
 
+// temporary
+// eslint-disable-next-line no-console
 console.log(todos)
