@@ -1,5 +1,6 @@
 export default {
   DEFAULTS: {
+    PORT: 8080,
     INITIAL_PAGE: 1,
     NUMOF_ITEMS_PER_PAGE: 10,
   },
