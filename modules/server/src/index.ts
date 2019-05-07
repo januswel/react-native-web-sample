@@ -22,5 +22,5 @@ app.use(Middlewares.notFoundHandler)
 const port = process.env.PORT || CONSTANTS.DEFAULTS.PORT
 
 app.listen(port, () => {
-  logger(`app listening on port ${port}`)
+  logger.info(`app listening on port ${port}`)
 })
