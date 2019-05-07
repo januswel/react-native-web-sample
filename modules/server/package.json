@@ -11,7 +11,7 @@
     "build": "tsc",
     "prebuild": "rm -rf dist",
     "test": "dredd",
-    "dev": "yarn ts-node-dev src/index.ts",
+    "dev": "DEBUG=app* yarn ts-node-dev src/index.ts",
     "doc": "aglio -i todo.apib --server"
   },
   "dependencies": {
