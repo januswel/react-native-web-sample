@@ -6,9 +6,23 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "build": "tsc"
+    "dev": "parcel ./public/index.html",
+    "build": "parcel build ./public/index.html",
+    "test": "jest --env=jsdom"
   },
   "dependencies": {
-    "@januswel/domain": "1.0.0"
+    "@januswel/domain": "1.0.0",
+    "react": "16.8.6",
+    "react-dom": "16.8.6",
+    "react-native-web": "0.11.2"
+  },
+  "devDependencies": {
+    "@types/react": "16.8.17",
+    "@types/react-dom": "16.8.4",
+    "@types/react-native": "0.57.55",
+    "babel-core": "^6.26.3",
+    "babel-plugin-react-native-web": "0.11.2",
+    "babel-preset-react-native": "4.0.1",
+    "parcel-bundler": "1.12.3"
   }
 }
