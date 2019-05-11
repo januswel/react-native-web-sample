@@ -1,5 +1,5 @@
 import * as Express from 'express'
-import { Todo, Todos } from '@januswel/domain'
+import { Todos } from '@januswel/domain'
 
 import CONSTANTS from '../constants'
 
@@ -13,10 +13,8 @@ const router = Express.Router()
 let todos = Todos.factory([])
 
 router.post('/', (req: Express.Request, res: Express.Response) => {
-  const { title, detail } = req.body
-  const todo = Todo.factory(title, detail)
-  todos = Todos.add(todos, todo)
-  res.status(STATUS_CODE.CREATED).json(todo)
+  todos = Todos.add(todos, req.body)
+  res.status(STATUS_CODE.CREATED).json(todos[-1])
 })
 
 const ZERO_ORIGIN_OFFSET = 1

@@ -7,7 +7,7 @@ describe('Todo', () => {
     it('returns Todo instances', () => {
       const timeExpected = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z$/u
 
-      const todo = Todo.factory('try RNW', 'implement app with react-native-web')
+      const todo = Todo.factory({ title: 'try RNW', detail: 'implement app with react-native-web' })
 
       expect(todo.id).toBe(1)
       expect(todo.title).toBe('try RNW')
@@ -21,7 +21,7 @@ describe('Todo', () => {
 
   describe('change', () => {
     it('returns Todo instances that values are changed to specified', async () => {
-      const todo = Todo.factory('abcde', '')
+      const todo = Todo.factory({ title: 'abcde', detail: '' })
       expect(todo.title).toBe('abcde')
 
       await setTimeout(() => {
@@ -39,7 +39,7 @@ describe('Todo', () => {
 
   describe('changeTitle', () => {
     it('returns Todo instances that title is changed to specified', async () => {
-      const todo = Todo.factory('abcde', '')
+      const todo = Todo.factory({ title: 'abcde', detail: '' })
       expect(todo.title).toBe('abcde')
 
       await setTimeout(() => {
@@ -54,7 +54,7 @@ describe('Todo', () => {
 
   describe('changeContent', () => {
     it('returns Todo instances that detail is changed to specified', async () => {
-      const todo = Todo.factory('', 'this is sample')
+      const todo = Todo.factory({ title: '', detail: 'this is sample' })
       expect(todo.detail).toBe('this is sample')
 
       await setTimeout(() => {
