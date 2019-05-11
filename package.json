@@ -5,13 +5,11 @@
   "author": "Takagi Kensuke <janus.wel.3@gmail.com>",
   "license": "MIT",
   "private": true,
-  "workspaces": [
-    "modules/*"
-  ],
+  "workspaces": ["modules/*"],
   "scripts": {
     "test": "yarn test:lint && yarn test:spec",
     "test:lint": "eslint **/*.ts",
-    "test:spec": "jest",
+    "test:spec": "yarn workspace @januswel/domain test",
     "clean": "git clean -Xdf",
     "postinstall": "cd modules/domain && yarn build"
   },
