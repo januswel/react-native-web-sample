@@ -1,12 +1,11 @@
 import * as React from 'react'
-import { Text, View } from 'react-native'
-import { Todo } from '@januswel/domain'
+import { Provider } from 'react-redux'
 
-const todo = Todo.factory('use RNW', 'setup react-native-web')
+import store from './store'
+import Screen from './containers/Screen'
 
 export default () => (
-  <View>
-    <Text>{todo.title}</Text>
-    <Text>{todo.detail}</Text>
-  </View>
+  <Provider store={store}>
+    <Screen />
+  </Provider>
 )
