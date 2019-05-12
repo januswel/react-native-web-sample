@@ -8,7 +8,7 @@ import { addSync, getSync, removeSync, updateSync } from '../usecases/todos'
 import Screen from '../components/Screen'
 import isWating from '../selectors/is-waiting'
 import getTodos from '../selectors/get-todos'
-import { AppState } from '../modules'
+import { AppState } from '../modules/index'
 
 export const mapStateToProps = (state: AppState) => ({
   error: state.error.error,

@@ -3,7 +3,7 @@ import { SafeAreaView, StyleSheet, Text } from 'react-native'
 
 import NetworkIndicator from './NetworkIndicator'
 import ErrorIndicator, { Actions as ErrorActions } from './ErrorIndicator'
-import Todos, { Actions as TodoActions, Props as TodosProps } from './Todos'
+import Todos, { Actions as TodoActions, State as TodosState } from './Todos'
 import AddForm, { Actions as AddFormActions } from './Form/Add'
 
 const styles = StyleSheet.create({
@@ -29,15 +29,15 @@ export type Actions = ErrorActions &
   AddFormActions &
   TodoActions & {
     getSync: () => void
+    updateSync: (id: number, todo: { title: string; detail: string }) => void
   }
 export interface Props {
   error: Error | null
   isCommunicating: boolean
-  todos: TodosProps
+  todos: TodosState
   actions: Actions
 }
 export default (props: Props) => {
-  console.log(props)
   React.useEffect(() => {
     props.actions.getSync()
   }, [])

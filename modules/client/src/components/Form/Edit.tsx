@@ -26,19 +26,22 @@ interface Todo {
   detail: string
 }
 export interface Actions {
-  updateSync: (id: number, values: Todo) => Promise<any>
-  setIsEditing: (newValue: boolean) => void
+  updateSync: (id: number, values: Todo) => void
 }
-interface Props {
+export interface State {
   id: number
   title: string
   detail: string
+}
+interface Props {
+  todo: State
   actions: Actions
+  setIsEditing: (newValue: boolean) => void
 }
 
 export default (props: Props) => {
-  const title = useTextInput(props.title)
-  const detail = useTextInput(props.detail)
+  const title = useTextInput(props.todo.title)
+  const detail = useTextInput(props.todo.detail)
 
   return (
     <View style={styles.container}>
@@ -48,14 +51,14 @@ export default (props: Props) => {
         <Button
           label="modify"
           onPress={() => {
-            props.actions.updateSync(props.id, { title: title.value, detail: detail.value })
-            props.actions.setIsEditing(false)
+            props.actions.updateSync(props.todo.id, { title: title.value, detail: detail.value })
+            props.setIsEditing(false)
           }}
         />
         <Button
           label="cancel"
           onPress={() => {
-            props.actions.setIsEditing(false)
+            props.setIsEditing(false)
           }}
         />
       </View>

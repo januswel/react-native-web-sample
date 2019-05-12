@@ -32,14 +32,17 @@ const styles = StyleSheet.create({
   },
 })
 
-type Actions = EditFormActions & {
+export type Actions = EditFormActions & {
   removeSync: (id: number) => void
 }
-export interface Props {
+export interface State {
   id: number
   title: string
   detail: string
   updatedAt: string
+}
+interface Props {
+  todo: State
   actions: Actions
 }
 
@@ -58,19 +61,19 @@ export default (props: Props) => {
         </TouchableOpacity>
         <TouchableOpacity
           onPress={() => {
-            props.actions.removeSync(props.id)
+            props.actions.removeSync(props.todo.id)
           }}
         >
           <Text>❌</Text>
         </TouchableOpacity>
       </View>
       {isEditing ? (
-        <EditForm {...props} actions={{ ...props.actions, setIsEditing }} />
+        <EditForm {...props} setIsEditing={setIsEditing} />
       ) : (
         <View style={styles.properties}>
-          <Text style={styles.title}>{props.title}</Text>
-          <Text style={styles.detail}>{props.detail}</Text>
-          <Text style={styles.updatedAt}>{props.updatedAt}</Text>
+          <Text style={styles.title}>{props.todo.title}</Text>
+          <Text style={styles.detail}>{props.todo.detail}</Text>
+          <Text style={styles.updatedAt}>{props.todo.updatedAt}</Text>
         </View>
       )}
     </View>
