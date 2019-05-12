@@ -3,7 +3,7 @@ import { SafeAreaView, StyleSheet, Text } from 'react-native'
 
 import NetworkIndicator from './NetworkIndicator'
 import ErrorIndicator, { Actions as ErrorActions } from './ErrorIndicator'
-import Todos, { Props as TodosProps } from './Todos'
+import Todos, { Actions as TodoActions, Props as TodosProps } from './Todos'
 import Input, { Actions as InputActions } from './Input'
 
 const styles = StyleSheet.create({
@@ -26,7 +26,8 @@ const styles = StyleSheet.create({
 })
 
 export type Actions = ErrorActions &
-  InputActions & {
+  InputActions &
+  TodoActions & {
     getSync: () => void
   }
 export interface Props {
@@ -46,7 +47,7 @@ export default (props: Props) => {
       <ErrorIndicator {...props} />
       <Text style={styles.title}>Todo App</Text>
       <Input actions={props.actions} />
-      <Todos todos={props.todos} />
+      <Todos todos={props.todos} actions={props.actions} />
       {props.isCommunicating ? <NetworkIndicator style={styles.networkIndicator} /> : null}
     </SafeAreaView>
   )

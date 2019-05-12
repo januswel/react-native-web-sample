@@ -88,5 +88,26 @@ export const addSync = (todo: Todo.Values) => (dispatch: Dispatch) => {
 export const updateSync = (id: number, todo: Todo.Values) => (dispatch: Dispatch) =>
   sync(dispatch, `${ENTRY_POINT}/${id}`, 'PATCH', update(id, todo))
 
-export const removeSync = (id: number) => (dispatch: Dispatch) =>
-  sync(dispatch, `${ENTRY_POINT}/${id}`, 'DELETE', remove(id))
+export const removeSync = (id: number) => (dispatch: Dispatch) => {
+  dispatch(sendRequest())
+  return fetch(`${ENTRY_POINT}/${id}`, {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json; charset=utf-8',
+    },
+  })
+    .then(response => {
+      if (!response.ok) {
+        response.text().then(text => {
+          dispatch(setError(new Error(text)))
+        })
+      }
+      dispatch(remove(id))
+    })
+    .catch(error => {
+      dispatch(setError(error))
+    })
+    .finally(() => {
+      dispatch(receiveResponse())
+    })
+}

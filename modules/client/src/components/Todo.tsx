@@ -1,16 +1,21 @@
 import * as React from 'react'
-import { StyleSheet, Text, View } from 'react-native'
-
-export interface Props {
-  id: number
-  title: string
-  detail: string
-  updatedAt: string
-}
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 
 const styles = StyleSheet.create({
   container: {
     margin: 4,
+    width: 320,
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  removeButton: {
+    width: 24,
+  },
+  properties: {
+    width: 296,
+    height: 96,
+    justifyContent: 'space-between',
   },
   title: {
     fontSize: 24,
@@ -25,10 +30,31 @@ const styles = StyleSheet.create({
   },
 })
 
+export interface Actions {
+  removeSync: (id: number) => void
+}
+export interface Props {
+  id: number
+  title: string
+  detail: string
+  updatedAt: string
+  actions: Actions
+}
+
 export default (props: Props) => (
   <View style={styles.container}>
-    <Text style={styles.title}>{props.title}</Text>
-    <Text style={styles.detail}>{props.detail}</Text>
-    <Text style={styles.updatedAt}>{props.updatedAt}</Text>
+    <TouchableOpacity
+      style={styles.removeButton}
+      onPress={() => {
+        props.actions.removeSync(props.id)
+      }}
+    >
+      <Text>❌</Text>
+    </TouchableOpacity>
+    <View style={styles.properties}>
+      <Text style={styles.title}>{props.title}</Text>
+      <Text style={styles.detail}>{props.detail}</Text>
+      <Text style={styles.updatedAt}>{props.updatedAt}</Text>
+    </View>
   </View>
 )
