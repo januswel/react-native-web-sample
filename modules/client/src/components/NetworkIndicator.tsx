@@ -1,12 +1,8 @@
 import * as React from 'react'
-import { ActivityIndicator, StyleSheet } from 'react-native'
+import { ActivityIndicator, ViewStyle } from 'react-native'
 
-const styles = StyleSheet.create({
-  container: {
-    position: 'absolute',
-    bottom: 16,
-    right: 16,
-  },
-})
+interface Props {
+  style: ViewStyle
+}
 
-export default () => <ActivityIndicator style={styles.container} size="large" />
+export default (props: Props) => <ActivityIndicator style={props.style} size="large" />

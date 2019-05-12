@@ -18,14 +18,17 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     marginBottom: 16,
   },
+  networkIndicator: {
+    position: 'absolute',
+    top: 16,
+    right: 16,
+  },
 })
 
-export type Actions =
-  | ErrorActions
-  | InputActions
-  | {
-      getSync: () => void
-    }
+export type Actions = ErrorActions &
+  InputActions & {
+    getSync: () => void
+  }
 export interface Props {
   error: Error | null
   isCommunicating: boolean
@@ -41,10 +44,10 @@ export default (props: Props) => {
   return (
     <SafeAreaView style={styles.container}>
       <ErrorIndicator {...props} />
-      {props.isCommunicating ? <NetworkIndicator /> : null}
       <Text style={styles.title}>Todo App</Text>
       <Input actions={props.actions} />
       <Todos todos={props.todos} />
+      {props.isCommunicating ? <NetworkIndicator style={styles.networkIndicator} /> : null}
     </SafeAreaView>
   )
 }
