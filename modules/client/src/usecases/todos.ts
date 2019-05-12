@@ -1,112 +1,102 @@
 import { Dispatch } from 'redux'
 import { Todo, Todos } from '@januswel/domain'
 
-import { Action, add, remove, setTodos, update } from '../modules/todos'
+import { add, remove, setTodos, update } from '../modules/todos'
 import { receiveResponse, sendRequest } from '../modules/network'
 import { setError } from '../modules/error'
 
 const ENTRY_POINT = 'http://localhost:8080/todo'
 
-export const getSync = () => (dispatch: Dispatch) => {
+interface FetchParameters {
+  method: string
+  headers: {
+    [header: string]: string
+  }
+  body?: string
+}
+interface SyncParameters {
+  url: string
+  method: string
+  dispatch: Dispatch
+  body?: Object
+  didReceiveResposne: (response: Response) => void
+}
+
+const sync = ({ url, method, dispatch, body, didReceiveResposne }: SyncParameters) => {
   dispatch(sendRequest())
-  return fetch(ENTRY_POINT, {
-    method: 'GET',
+  const parameters: FetchParameters = {
+    method,
     headers: {
       'Content-Type': 'application/json; charset=utf-8',
     },
-  })
+  }
+  if (body != null) {
+    parameters.body = JSON.stringify(body)
+  }
+
+  return fetch(url, parameters)
     .then(response => {
       if (!response.ok) {
         response.text().then(text => {
           dispatch(setError(new Error(text)))
         })
       }
+      if (didReceiveResposne != null) {
+        didReceiveResposne(response)
+      }
+    })
+    .catch(error => {
+      dispatch(setError(error))
+    })
+    .finally(() => {
+      dispatch(receiveResponse())
+    })
+}
+
+export const getSync = () => (dispatch: Dispatch) =>
+  sync({
+    url: ENTRY_POINT,
+    method: 'GET',
+    dispatch,
+    didReceiveResposne: (response: Response) => {
       response.json().then((todos: Todos.Entity) => {
         dispatch(setTodos(todos))
       })
-    })
-    .catch(error => {
-      dispatch(setError(error))
-    })
-    .finally(() => {
-      dispatch(receiveResponse())
-    })
-}
-
-export const addSync = (todo: Todo.Values) => (dispatch: Dispatch) => {
-  dispatch(sendRequest())
-  return fetch(ENTRY_POINT, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json; charset=utf-8',
     },
-    body: JSON.stringify(todo),
   })
-    .then(response => {
-      if (!response.ok) {
-        response.text().then(text => {
-          dispatch(setError(new Error(text)))
-        })
-      }
+
+export const addSync = (todo: Todo.Values) => (dispatch: Dispatch) =>
+  sync({
+    url: ENTRY_POINT,
+    method: 'POST',
+    dispatch,
+    body: todo,
+    didReceiveResposne: (response: Response) => {
       response.json().then((entity: Todo.Entity) => {
         dispatch(add(entity))
       })
-    })
-    .catch(error => {
-      dispatch(setError(error))
-    })
-    .finally(() => {
-      dispatch(receiveResponse())
-    })
-}
-
-export const updateSync = (id: number, todo: Todo.Values) => (dispatch: Dispatch) => {
-  dispatch(sendRequest())
-  return fetch(`${ENTRY_POINT}/${id}`, {
-    method: 'PATCH',
-    headers: {
-      'Content-Type': 'application/json; charset=utf-8',
     },
-    body: JSON.stringify(todo),
   })
-    .then(response => {
-      if (!response.ok) {
-        response.text().then(text => {
-          dispatch(setError(new Error(text)))
-        })
-      }
-      return response.json().then(entity => {
+
+export const updateSync = (id: number, todo: Todo.Values) => (dispatch: Dispatch) =>
+  sync({
+    url: `${ENTRY_POINT}/${id}`,
+    method: 'PATCH',
+    dispatch,
+    body: todo,
+    didReceiveResposne: (response: Response) => {
+      response.json().then(entity => {
         dispatch(update(id, entity))
       })
-    })
-    .catch(error => {
-      dispatch(setError(error))
-    })
-    .finally(() => {
-      dispatch(receiveResponse())
-    })
-}
-
-export const removeSync = (id: number) => (dispatch: Dispatch) => {
-  dispatch(sendRequest())
-  return fetch(`${ENTRY_POINT}/${id}`, {
-    method: 'DELETE',
-    headers: {
-      'Content-Type': 'application/json; charset=utf-8',
     },
   })
-    .then(response => {
-      if (!response.ok) {
-        response.text().then(text => {
-          dispatch(setError(new Error(text)))
-        })
-      }
+
+export const removeSync = (id: number) => (dispatch: Dispatch) =>
+  sync({
+    url: `${ENTRY_POINT}/${id}`,
+    method: 'DELETE',
+    dispatch,
+    didReceiveResposne: (_response: Response) => {
       dispatch(remove(id))
-    })
-    .catch(error => {
-      dispatch(setError(error))
-    })
-    .finally(() => {
-      dispatch(receiveResponse())
-    })
-}
+    },
+  })
