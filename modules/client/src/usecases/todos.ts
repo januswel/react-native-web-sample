@@ -1,7 +1,7 @@
 import { Dispatch } from 'redux'
 import { Todo, Todos } from '@januswel/domain'
 
-import { add, remove, setTodos, update } from '../modules/todos'
+import { add, remove, set, update } from '../modules/todos'
 import { receiveResponse, sendRequest } from '../modules/network'
 import { setError } from '../modules/error'
 
@@ -60,7 +60,7 @@ export const getSync = () => (dispatch: Dispatch) =>
     dispatch,
     didReceiveResposne: (response: Response) => {
       response.json().then((todos: Todos.Entity) => {
-        dispatch(setTodos(todos))
+        dispatch(set(todos))
       })
     },
   })
