@@ -2,10 +2,13 @@ import * as React from 'react'
 import { StyleSheet, TextInput, View } from 'react-native'
 
 import InputItem from './InputItem'
+import Button from './Button'
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    justifyContent: 'center',
+    alignItems: 'flex-end',
     width: 300,
   },
   input: {
@@ -35,7 +38,18 @@ const useTextInput = (initialValue: string) => {
   }
 }
 
-export default () => {
+interface Todo {
+  title: string
+  detail: string
+}
+export interface Actions {
+  addSync: (values: Todo) => void
+}
+interface Props {
+  actions: Actions
+}
+
+export default (props: Props) => {
   const title = useTextInput('')
   const detail = useTextInput('')
 
@@ -47,6 +61,12 @@ export default () => {
       <InputItem label="detail">
         <TextInput style={[styles.input, styles.inputDetail]} multiline {...detail} />
       </InputItem>
+      <Button
+        label="add"
+        onPress={() => {
+          props.actions.addSync({ title: title.value, detail: detail.value })
+        }}
+      />
     </View>
   )
 }

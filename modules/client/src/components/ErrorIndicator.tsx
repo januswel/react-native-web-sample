@@ -13,10 +13,9 @@ const styles = StyleSheet.create({
   },
 })
 
-type ErrorActions = {
+export interface Actions {
   clearError: () => void
 }
-export type Actions = ErrorActions
 export interface Props {
   error: Error | null
   actions: Actions

@@ -30,7 +30,7 @@ const sync = (dispatch: Dispatch, url: string, method: string, action: Action) =
     })
 }
 
-const ENTRY_POINT = 'http://localhost:1234/todo'
+const ENTRY_POINT = 'http://localhost:8080/todo'
 
 export const addSync = (todo: Todo.Values) => (dispatch: Dispatch) => sync(dispatch, ENTRY_POINT, 'POST', add(todo))
 
