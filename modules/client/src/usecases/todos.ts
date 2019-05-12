@@ -1,7 +1,7 @@
 import { Dispatch } from 'redux'
 import { Todo } from '@januswel/domain'
 
-import { Action, add, remove, update } from '../modules/todo'
+import { Action, add, remove, update } from '../modules/todos'
 import { receiveResponse, sendRequest } from '../modules/network'
 import { setError } from '../modules/error'
 

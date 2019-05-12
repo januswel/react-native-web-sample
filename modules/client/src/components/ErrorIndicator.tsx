@@ -22,7 +22,7 @@ export interface Props {
   actions: Actions
 }
 export default (props: Props) =>
-  props.error != null && (
+  props.error != null ? (
     <Text
       style={styles.container}
       onPress={() => {
@@ -31,4 +31,4 @@ export default (props: Props) =>
     >
       {props.error.message}
     </Text>
-  )
+  ) : null

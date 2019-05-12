@@ -4,14 +4,16 @@ import { AnyAction } from 'redux'
 import { Todo } from '@januswel/domain'
 
 import { clearError } from '../modules/error'
-import { addSync, removeSync, updateSync } from '../usecases/todo'
+import { addSync, removeSync, updateSync } from '../usecases/todos'
 import Screen from '../components/Screen'
 import isWating from '../selectors/is-waiting'
+import getTodos from '../selectors/get-todos'
 import { AppState } from '../modules'
 
 export const mapStateToProps = (state: AppState) => ({
   error: state.error.error,
   isCommunicating: isWating(state),
+  todos: getTodos(state),
 })
 
 export const mapDispatchToProps = (dispatch: ThunkDispatch<AppState, void, AnyAction>) => ({
