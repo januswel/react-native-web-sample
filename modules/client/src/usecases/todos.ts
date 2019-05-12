@@ -36,11 +36,6 @@ const sync = ({ url, method, dispatch, body, didReceiveResposne }: SyncParameter
 
   return fetch(url, parameters)
     .then(response => {
-      if (!response.ok) {
-        response.text().then(text => {
-          dispatch(setError(new Error(text)))
-        })
-      }
       if (didReceiveResposne != null) {
         didReceiveResposne(response)
       }
@@ -53,12 +48,18 @@ const sync = ({ url, method, dispatch, body, didReceiveResposne }: SyncParameter
     })
 }
 
+const NOT_FOUND = 404
 export const getSync = () => (dispatch: Dispatch) =>
   sync({
     url: ENTRY_POINT,
     method: 'GET',
     dispatch,
     didReceiveResposne: (response: Response) => {
+      if (!response.ok && response.status !== NOT_FOUND) {
+        response.text().then(text => {
+          dispatch(setError(new Error(text)))
+        })
+      }
       response.json().then((todos: Todos.Entity) => {
         dispatch(set(todos))
       })
@@ -72,6 +73,11 @@ export const addSync = (todo: Todo.Values) => (dispatch: Dispatch) =>
     dispatch,
     body: todo,
     didReceiveResposne: (response: Response) => {
+      if (!response.ok) {
+        response.text().then(text => {
+          dispatch(setError(new Error(text)))
+        })
+      }
       response.json().then((entity: Todo.Entity) => {
         dispatch(add(entity))
       })
@@ -85,6 +91,11 @@ export const updateSync = (id: number, todo: Todo.Values) => (dispatch: Dispatch
     dispatch,
     body: todo,
     didReceiveResposne: (response: Response) => {
+      if (!response.ok) {
+        response.text().then(text => {
+          dispatch(setError(new Error(text)))
+        })
+      }
       response.json().then(entity => {
         dispatch(update(id, entity))
       })
@@ -96,7 +107,12 @@ export const removeSync = (id: number) => (dispatch: Dispatch) =>
     url: `${ENTRY_POINT}/${id}`,
     method: 'DELETE',
     dispatch,
-    didReceiveResposne: (_response: Response) => {
+    didReceiveResposne: (response: Response) => {
+      if (!response.ok) {
+        response.text().then(text => {
+          dispatch(setError(new Error(text)))
+        })
+      }
       dispatch(remove(id))
     },
   })
