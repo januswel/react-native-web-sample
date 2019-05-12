@@ -29,6 +29,7 @@ jobs:
           keys:
             - v3-dependencies-{{ checksum "package.json" }}
             - v3-dependencies-
+      - run: yarn workspace @januswel/domain build
       - run: yarn test
   test-server:
     docker:
