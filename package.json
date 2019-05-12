@@ -7,6 +7,8 @@
   "private": true,
   "workspaces": ["modules/*"],
   "scripts": {
+    "start:server": "yarn workspace @januswel/server dev",
+    "start:client": "yarn workspace @januswel/client dev",
     "test": "yarn test:lint && yarn test:spec",
     "test:lint": "eslint **/*.ts",
     "test:spec": "yarn test:spec:domain && yarn test:spec:client",
