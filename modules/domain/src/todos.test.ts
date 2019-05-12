@@ -1,5 +1,6 @@
 /* eslint no-magic-numbers: off */
 
+import * as Todo from './todo'
 import * as Todos from './todos'
 
 const TODOS = Todos.factory([
@@ -46,7 +47,7 @@ describe('Todos', () => {
   describe('add', () => {
     it('returns array that has specified one in last', () => {
       expect(TODOS.length).toBe(3)
-      const added = Todos.add(TODOS, { title: '4', detail: 'sample' })
+      const added = Todos.add(TODOS, Todo.create({ title: '4', detail: 'sample' }))
       expect(added.length).toBe(4)
     })
   })
