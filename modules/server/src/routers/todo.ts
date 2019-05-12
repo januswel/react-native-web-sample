@@ -14,7 +14,6 @@ let todos = Todos.factory([])
 todos = Todos.add(todos, Todo.create({ title: 'sample', detail: 'this is sample todo' }))
 
 router.post('/', (req: Express.Request, res: Express.Response) => {
-  console.log(req.body)
   const todo = Todo.create(req.body)
   todos = Todos.add(todos, todo)
   res.status(STATUS_CODE.CREATED).json(todo)
@@ -59,7 +58,7 @@ router.get('/:id', (req: Express.Request, res: Express.Response) => {
 
 router.patch('/:id', (req: Express.Request, res: Express.Response) => {
   const id = parseInt(req.params.id, 10)
-  const { title, detail } = req.body.data
+  const { title, detail } = req.body
 
   try {
     todos = Todos.update(todos, id, { title, detail })

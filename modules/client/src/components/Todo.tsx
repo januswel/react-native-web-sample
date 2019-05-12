@@ -1,6 +1,8 @@
 import * as React from 'react'
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 
+import EditForm, { Actions as EditFormActions } from './Form/Edit'
+
 const styles = StyleSheet.create({
   container: {
     margin: 4,
@@ -9,12 +11,12 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
   },
-  removeButton: {
+  buttons: {
     width: 24,
+    flex: 1,
   },
   properties: {
     width: 296,
-    height: 96,
     justifyContent: 'space-between',
   },
   title: {
@@ -30,7 +32,7 @@ const styles = StyleSheet.create({
   },
 })
 
-export interface Actions {
+type Actions = EditFormActions & {
   removeSync: (id: number) => void
 }
 export interface Props {
@@ -41,20 +43,36 @@ export interface Props {
   actions: Actions
 }
 
-export default (props: Props) => (
-  <View style={styles.container}>
-    <TouchableOpacity
-      style={styles.removeButton}
-      onPress={() => {
-        props.actions.removeSync(props.id)
-      }}
-    >
-      <Text>❌</Text>
-    </TouchableOpacity>
-    <View style={styles.properties}>
-      <Text style={styles.title}>{props.title}</Text>
-      <Text style={styles.detail}>{props.detail}</Text>
-      <Text style={styles.updatedAt}>{props.updatedAt}</Text>
+export default (props: Props) => {
+  const [isEditing, setIsEditing] = React.useState(false)
+
+  return (
+    <View style={styles.container}>
+      <View style={styles.buttons}>
+        <TouchableOpacity
+          onPress={() => {
+            setIsEditing(true)
+          }}
+        >
+          <Text>✏️</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => {
+            props.actions.removeSync(props.id)
+          }}
+        >
+          <Text>❌</Text>
+        </TouchableOpacity>
+      </View>
+      {isEditing ? (
+        <EditForm {...props} actions={{ ...props.actions, setIsEditing }} />
+      ) : (
+        <View style={styles.properties}>
+          <Text style={styles.title}>{props.title}</Text>
+          <Text style={styles.detail}>{props.detail}</Text>
+          <Text style={styles.updatedAt}>{props.updatedAt}</Text>
+        </View>
+      )}
     </View>
-  </View>
-)
+  )
+}

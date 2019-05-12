@@ -4,7 +4,7 @@ import { SafeAreaView, StyleSheet, Text } from 'react-native'
 import NetworkIndicator from './NetworkIndicator'
 import ErrorIndicator, { Actions as ErrorActions } from './ErrorIndicator'
 import Todos, { Actions as TodoActions, Props as TodosProps } from './Todos'
-import Input, { Actions as InputActions } from './Input'
+import AddForm, { Actions as AddFormActions } from './Form/Add'
 
 const styles = StyleSheet.create({
   container: {
@@ -26,7 +26,7 @@ const styles = StyleSheet.create({
 })
 
 export type Actions = ErrorActions &
-  InputActions &
+  AddFormActions &
   TodoActions & {
     getSync: () => void
   }
@@ -46,7 +46,7 @@ export default (props: Props) => {
     <SafeAreaView style={styles.container}>
       <ErrorIndicator {...props} />
       <Text style={styles.title}>Todo App</Text>
-      <Input actions={props.actions} />
+      <AddForm actions={props.actions} />
       <Todos todos={props.todos} actions={props.actions} />
       {props.isCommunicating ? <NetworkIndicator style={styles.networkIndicator} /> : null}
     </SafeAreaView>
