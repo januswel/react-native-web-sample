@@ -5,7 +5,8 @@
     "rootDir": "./src",
     "outDir": "./dist",
     "jsx": "react",
-    "strictFunctionTypes": false
+    "strictFunctionTypes": false,
+    "esModuleInterop": true
   },
   "references": [{ "path": "../domain" }],
   "exclude": ["dist", "node_modules", "**/*.test.ts"]
