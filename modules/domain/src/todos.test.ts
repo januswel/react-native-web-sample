@@ -4,16 +4,25 @@ import * as Todos from './todos'
 
 const TODOS = Todos.factory([
   {
+    id: 1,
     title: '1',
     detail: 'sample',
+    createdAt: '2019-05-12T23:19:00.000Z',
+    updatedAt: '2019-05-12T23:19:00.000Z',
   },
   {
+    id: 2,
     title: '2',
     detail: 'sample',
+    createdAt: '2019-05-12T23:19:00.000Z',
+    updatedAt: '2019-05-12T23:19:00.000Z',
   },
   {
+    id: 3,
     title: '3',
     detail: 'sample',
+    createdAt: '2019-05-12T23:19:00.000Z',
+    updatedAt: '2019-05-12T23:19:00.000Z',
   },
 ])
 

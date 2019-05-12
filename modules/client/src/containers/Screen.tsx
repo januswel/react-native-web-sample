@@ -4,7 +4,7 @@ import { AnyAction } from 'redux'
 import { Todo } from '@januswel/domain'
 
 import { clearError } from '../modules/error'
-import { addSync, removeSync, updateSync } from '../usecases/todos'
+import { addSync, getSync, removeSync, updateSync } from '../usecases/todos'
 import Screen from '../components/Screen'
 import isWating from '../selectors/is-waiting'
 import getTodos from '../selectors/get-todos'
@@ -30,6 +30,7 @@ export const mapDispatchToProps = (dispatch: ThunkDispatch<AppState, void, AnyAc
     removeSync: (id: number) => {
       dispatch(removeSync(id))
     },
+    getSync: () => dispatch(getSync()),
   },
 })
 

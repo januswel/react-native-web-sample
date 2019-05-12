@@ -1,5 +1,5 @@
 import * as Express from 'express'
-import { Todos } from '@januswel/domain'
+import { Todo, Todos } from '@januswel/domain'
 
 import CONSTANTS from '../constants'
 
@@ -11,10 +11,13 @@ const {
 const router = Express.Router()
 
 let todos = Todos.factory([])
+todos = Todos.add(todos, Todo.create({ title: 'sample', detail: 'this is sample todo' }))
 
 router.post('/', (req: Express.Request, res: Express.Response) => {
-  todos = Todos.add(todos, req.body)
-  res.status(STATUS_CODE.CREATED).json(todos[-1])
+  console.log(req.body)
+  const todo = Todo.create(req.body)
+  todos = Todos.add(todos, todo)
+  res.status(STATUS_CODE.CREATED).json(todo)
 })
 
 const ZERO_ORIGIN_OFFSET = 1
@@ -56,7 +59,7 @@ router.get('/:id', (req: Express.Request, res: Express.Response) => {
 
 router.patch('/:id', (req: Express.Request, res: Express.Response) => {
   const id = parseInt(req.params.id, 10)
-  const { title, detail } = req.body
+  const { title, detail } = req.body.data
 
   try {
     todos = Todos.update(todos, id, { title, detail })

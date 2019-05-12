@@ -1,11 +1,10 @@
 import * as Todo from './todo'
 
 export type Entity = Array<Todo.Entity>
-type Seeds = Array<Todo.Values>
 
-export const factory = (seeds: Seeds): Entity => seeds.map(seed => Todo.factory(seed))
-export const add = (todos: Entity, values: Todo.Values): Entity => {
-  return [...todos, Todo.factory(values)]
+export const factory = (todos: Entity): Entity => todos
+export const add = (todos: Entity, todo: Todo.Entity): Entity => {
+  return [...todos, todo]
 }
 export const slice = (todos: Entity, begin: number, end: number): Entity => todos.slice(begin, end)
 export const get = (todos: Entity, id: number): Todo.Entity => {

@@ -22,7 +22,6 @@ const MONTH_OFFSET = 1
 const buildAgoString = (datetime: string) => {
   const updatedAt = new Date(datetime)
   const delta = new Date().getTime() - updatedAt.getTime()
-  console.log(delta)
 
   if (delta < TWO_SECONDS) {
     return 'now'

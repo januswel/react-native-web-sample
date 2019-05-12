@@ -11,6 +11,7 @@
     "build": "tsc",
     "prebuild": "rm -rf dist",
     "prepare": "yarn build",
+    "rebuild": "rm -f tsconfig.tsbuildinfo && yarn build",
     "test": "jest"
   }
 }

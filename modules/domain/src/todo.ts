@@ -13,7 +13,9 @@ export interface Values {
 
 let number = 0
 
-export const factory = (todo: Values): Entity => {
+export const factory = (todo: Entity): Entity => todo
+
+export const create = (todo: Values): Entity => {
   const now = new Date()
   return {
     id: ++number,

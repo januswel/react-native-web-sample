@@ -5,9 +5,25 @@ import * as Todo from './todo'
 describe('Todo', () => {
   describe('factory', () => {
     it('returns Todo instances', () => {
+      const todo = Todo.factory({
+        id: 1,
+        title: 'foo',
+        detail: 'bar',
+        createdAt: '2019-05-12T23:19:00.000Z',
+        updatedAt: '2019-05-12T23:19:00.000Z',
+      })
+      expect(todo.id).toBe(1)
+      expect(todo.title).toBe('foo')
+      expect(todo.detail).toBe('bar')
+      expect(todo.createdAt).toBe('2019-05-12T23:19:00.000Z')
+      expect(todo.updatedAt).toBe('2019-05-12T23:19:00.000Z')
+    })
+  })
+  describe('create', () => {
+    it('returns Todo instances', () => {
       const timeExpected = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z$/u
 
-      const todo = Todo.factory({ title: 'try RNW', detail: 'implement app with react-native-web' })
+      const todo = Todo.create({ title: 'try RNW', detail: 'implement app with react-native-web' })
 
       expect(todo.id).toBe(1)
       expect(todo.title).toBe('try RNW')
@@ -21,7 +37,7 @@ describe('Todo', () => {
 
   describe('change', () => {
     it('returns Todo instances that values are changed to specified', async () => {
-      const todo = Todo.factory({ title: 'abcde', detail: '' })
+      const todo = Todo.create({ title: 'abcde', detail: '' })
       expect(todo.title).toBe('abcde')
 
       await setTimeout(() => {
@@ -39,7 +55,7 @@ describe('Todo', () => {
 
   describe('changeTitle', () => {
     it('returns Todo instances that title is changed to specified', async () => {
-      const todo = Todo.factory({ title: 'abcde', detail: '' })
+      const todo = Todo.create({ title: 'abcde', detail: '' })
       expect(todo.title).toBe('abcde')
 
       await setTimeout(() => {
@@ -54,7 +70,7 @@ describe('Todo', () => {
 
   describe('changeContent', () => {
     it('returns Todo instances that detail is changed to specified', async () => {
-      const todo = Todo.factory({ title: '', detail: 'this is sample' })
+      const todo = Todo.create({ title: '', detail: 'this is sample' })
       expect(todo.detail).toBe('this is sample')
 
       await setTimeout(() => {
