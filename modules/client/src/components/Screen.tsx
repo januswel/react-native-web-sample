@@ -4,6 +4,7 @@ import { SafeAreaView, StyleSheet, Text } from 'react-native'
 import NetworkIndicator from './NetworkIndicator'
 import ErrorIndicator, { Actions as ErrorActions } from './ErrorIndicator'
 import Todos, { Props as TodosProps } from './Todos'
+import Input from './Input'
 
 const styles = StyleSheet.create({
   container: {
@@ -29,6 +30,7 @@ export interface Props {
 export default (props: Props) => (
   <SafeAreaView style={styles.container}>
     <Text style={styles.title}>Todo App</Text>
+    <Input />
     {props.isCommunicating ? <NetworkIndicator /> : null}
     <ErrorIndicator {...props} />
     <Todos todos={props.todos} />
