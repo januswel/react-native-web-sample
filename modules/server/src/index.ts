@@ -12,6 +12,7 @@ const app = Express()
 app.use(bodyParser.json())
 
 app.use(Middlewares.accessLogger)
+app.use(Middlewares.cors)
 
 app.use('/todo', todoRouter)
 app.use('/', healthCheckRouter)

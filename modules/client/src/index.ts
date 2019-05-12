@@ -1,16 +1,10 @@
-import { Todos } from '@januswel/domain'
+import { AppRegistry } from 'react-native'
 
-const todos = Todos.factory([
-  {
-    title: 'use RNW',
-    detail: 'setup react-native-web',
-  },
-  {
-    title: 'build Todo app',
-    detail: 'implement client',
-  },
-])
+import App from './App'
 
-// temporary
-// eslint-disable-next-line no-console
-console.log(todos)
+AppRegistry.registerComponent('App', () => App)
+
+AppRegistry.runApplication('App', {
+  initialProps: {},
+  rootTag: document.getElementById('root'),
+})

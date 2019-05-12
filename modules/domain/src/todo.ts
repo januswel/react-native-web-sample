@@ -13,12 +13,14 @@ export interface Values {
 
 let number = 0
 
-export const factory = (title: string, detail: string): Entity => {
+export const factory = (todo: Entity): Entity => todo
+
+export const create = (todo: Values): Entity => {
   const now = new Date()
   return {
     id: ++number,
-    title,
-    detail,
+    title: todo.title,
+    detail: todo.detail,
     createdAt: now.toISOString(),
     updatedAt: now.toISOString(),
   }

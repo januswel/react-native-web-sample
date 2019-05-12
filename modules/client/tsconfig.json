@@ -1,9 +1,11 @@
 {
   "extends": "../../tsconfig.json",
   "compilerOptions": {
+    "module": "es2015",
     "rootDir": "./src",
     "outDir": "./dist",
-    "jsx": "react"
+    "jsx": "react",
+    "strictFunctionTypes": false
   },
   "references": [{ "path": "../domain" }],
   "exclude": ["dist", "node_modules", "**/*.test.ts"]

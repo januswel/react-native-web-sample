@@ -11,10 +11,10 @@ const {
 const router = Express.Router()
 
 let todos = Todos.factory([])
+todos = Todos.add(todos, Todo.create({ title: 'sample', detail: 'this is sample todo' }))
 
 router.post('/', (req: Express.Request, res: Express.Response) => {
-  const { title, detail } = req.body
-  const todo = Todo.factory(title, detail)
+  const todo = Todo.create(req.body)
   todos = Todos.add(todos, todo)
   res.status(STATUS_CODE.CREATED).json(todo)
 })

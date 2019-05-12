@@ -6,9 +6,31 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "build": "tsc"
+    "dev": "parcel ./public/index.html",
+    "build": "parcel build ./public/index.html",
+    "test": "jest"
   },
   "dependencies": {
-    "@januswel/domain": "1.0.0"
+    "@januswel/domain": "1.0.0",
+    "react": "16.8.6",
+    "react-dom": "16.8.6",
+    "react-native-web": "0.11.2",
+    "react-redux": "7.0.3",
+    "redux": "4.0.1",
+    "redux-thunk": "2.3.0",
+    "reselect": "4.0.0"
+  },
+  "devDependencies": {
+    "@babel/core": "7.4.4",
+    "@babel/preset-env": "7.4.4",
+    "@types/react": "16.8.17",
+    "@types/react-dom": "16.8.4",
+    "@types/react-native": "0.57.55",
+    "@types/react-redux": "7.0.8",
+    "@types/react-test-renderer": "16.8.1",
+    "babel-plugin-react-native-web": "0.11.2",
+    "metro-react-native-babel-preset": "0.54.0",
+    "parcel-bundler": "1.12.3",
+    "react-test-renderer": "16.8.6"
   }
 }

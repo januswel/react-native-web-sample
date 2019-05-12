@@ -5,16 +5,25 @@ import * as Todos from './todos'
 
 const TODOS = Todos.factory([
   {
+    id: 1,
     title: '1',
     detail: 'sample',
+    createdAt: '2019-05-12T23:19:00.000Z',
+    updatedAt: '2019-05-12T23:19:00.000Z',
   },
   {
+    id: 2,
     title: '2',
     detail: 'sample',
+    createdAt: '2019-05-12T23:19:00.000Z',
+    updatedAt: '2019-05-12T23:19:00.000Z',
   },
   {
+    id: 3,
     title: '3',
     detail: 'sample',
+    createdAt: '2019-05-12T23:19:00.000Z',
+    updatedAt: '2019-05-12T23:19:00.000Z',
   },
 ])
 
@@ -38,13 +47,8 @@ describe('Todos', () => {
   describe('add', () => {
     it('returns array that has specified one in last', () => {
       expect(TODOS.length).toBe(3)
-      const added = Todos.add(TODOS, Todo.factory('4', 'sample'))
+      const added = Todos.add(TODOS, Todo.create({ title: '4', detail: 'sample' }))
       expect(added.length).toBe(4)
-    })
-    it('throws error if specified id is existing already', () => {
-      expect(() => {
-        Todos.add(TODOS, TODOS[0])
-      }).toThrow()
     })
   })
 
