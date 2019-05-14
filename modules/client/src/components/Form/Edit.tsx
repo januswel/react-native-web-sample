@@ -57,6 +57,7 @@ export default (props: Props) => {
         />
         <Button
           label="cancel"
+          negative
           onPress={() => {
             props.setIsEditing(false)
           }}

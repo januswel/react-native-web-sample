@@ -5,23 +5,31 @@ const styles = StyleSheet.create({
   container: {
     width: 120,
     borderWidth: 1,
-    borderColor: 'gray',
     borderRadius: 16,
-    backgroundColor: 'gray',
+    borderColor: '#2e6da4',
+    backgroundColor: '#337ab7',
   },
   label: {
     textAlign: 'center',
     color: 'white',
   },
+  negative: {
+    borderColor: '#adadad',
+    backgroundColor: 'gray',
+  },
 })
 
 export interface Props {
   label: string
+  negative?: boolean
   onPress: () => void
 }
 
-export default (props: Props) => (
-  <TouchableOpacity style={styles.container} onPress={props.onPress}>
-    <Text style={styles.label}>{props.label}</Text>
-  </TouchableOpacity>
-)
+export default (props: Props) => {
+  const containerStyle = props.negative ? [styles.container, styles.negative] : styles.container
+  return (
+    <TouchableOpacity style={containerStyle} onPress={props.onPress}>
+      <Text style={styles.label}>{props.label}</Text>
+    </TouchableOpacity>
+  )
+}
