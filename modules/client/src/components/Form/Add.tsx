@@ -38,6 +38,8 @@ export default (props: Props) => {
         label="add"
         onPress={() => {
           props.actions.addSync({ title: title.value, detail: detail.value })
+          title.onChangeText('')
+          detail.onChangeText('')
         }}
       />
     </View>
