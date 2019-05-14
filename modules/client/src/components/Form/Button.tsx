@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { StyleSheet, Text, TouchableOpacity } from 'react-native'
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 
 const styles = StyleSheet.create({
   container: {
@@ -22,14 +22,20 @@ const styles = StyleSheet.create({
 export interface Props {
   label: string
   negative?: boolean
+  disabled?: boolean
   onPress: () => void
 }
 
-export default (props: Props) => {
-  const containerStyle = props.negative ? [styles.container, styles.negative] : styles.container
-  return (
-    <TouchableOpacity style={containerStyle} onPress={props.onPress}>
+export default (props: Props) =>
+  props.disabled ? (
+    <View style={[styles.container, styles.negative]}>
+      <Text style={styles.label}>{props.label}</Text>
+    </View>
+  ) : (
+    <TouchableOpacity
+      style={props.negative ? [styles.container, styles.negative] : styles.container}
+      onPress={props.onPress}
+    >
       <Text style={styles.label}>{props.label}</Text>
     </TouchableOpacity>
   )
-}

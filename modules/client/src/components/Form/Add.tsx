@@ -36,6 +36,7 @@ export default (props: Props) => {
       <Detail {...detail} />
       <Button
         label="add"
+        disabled={title.value.length === 0}
         onPress={() => {
           props.actions.addSync({ title: title.value, detail: detail.value })
           title.onChangeText('')
