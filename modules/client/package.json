@@ -36,6 +36,7 @@
     "metro-react-native-babel-preset": "0.54.1",
     "parcel-bundler": "1.12.3",
     "puppeteer": "1.16.0",
-    "react-test-renderer": "16.8.6"
+    "react-test-renderer": "16.8.6",
+    "ts-node-dev": "1.0.0-pre.39"
   }
 }
