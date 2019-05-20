@@ -12,11 +12,12 @@ const OPTIONS = {
   userAgent:
     'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.101 Safari/537.36',
 }
+const SCREENSHOTS_DIR = 'screenshots'
 
 const runScenario = async (browser: Puppeteer.Browser) => {
   const page = await openPage(browser, ENTRY_POINT, OPTIONS)
   await page.waitForSelector('[data-testid="add-button"]')
-  await page.screenshot({ path: 'e2e.png' })
+  await page.screenshot({ path: `${SCREENSHOTS_DIR}/initial.png` })
 }
 
 const main = async () => {
