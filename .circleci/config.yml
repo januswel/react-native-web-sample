@@ -9,8 +9,8 @@ jobs:
       - checkout
       - restore_cache:
           keys:
-            - v3-dependencies-{{ checksum "package.json" }}
-            - v3-dependencies-
+            - v4-dependencies-{{ checksum "package.json" }}
+            - v4-dependencies-
       - run: yarn
       - run: yarn workspace @januswel/domain rebuild
       - save_cache:
@@ -20,7 +20,7 @@ jobs:
             - modules/server/node_modules
             - modules/client/node_modules
             - modules/domain/dist
-          key: v3-dependencies-{{ checksum "package.json" }}
+          key: v4-dependencies-{{ checksum "package.json" }}
   test:
     docker:
       - image: circleci/node:10.15
@@ -29,8 +29,8 @@ jobs:
       - checkout
       - restore_cache:
           keys:
-            - v3-dependencies-{{ checksum "package.json" }}
-            - v3-dependencies-
+            - v4-dependencies-{{ checksum "package.json" }}
+            - v4-dependencies-
       - run: yarn test
   test-server:
     docker:
@@ -40,8 +40,8 @@ jobs:
       - checkout
       - restore_cache:
           keys:
-            - v3-dependencies-{{ checksum "package.json" }}
-            - v3-dependencies-
+            - v4-dependencies-{{ checksum "package.json" }}
+            - v4-dependencies-
       - run: sudo yarn global add dredd@11.0.2
       - run: yarn workspace @januswel/server test
   test-e2e:
@@ -52,8 +52,8 @@ jobs:
       - checkout
       - restore_cache:
           keys:
-            - v3-dependencies-{{ checksum "package.json" }}
-            - v3-dependencies-
+            - v4-dependencies-{{ checksum "package.json" }}
+            - v4-dependencies-
       - run:
           command: yarn start:server
           background: true
