@@ -38,6 +38,11 @@ const runScenario = async (browser: Puppeteer.Browser) => {
   await page.waitForSelector('[data-testid="todo-2"]')
 
   await page.screenshot({ path: `${SCREENSHOTS_DIR}/updated.png` })
+
+  await page.click('[data-testid="delete-button-1"]')
+  await page.waitForSelector('[data-testid="network-indicator"]', { hidden: true })
+
+  await page.screenshot({ path: `${SCREENSHOTS_DIR}/delated.png` })
 }
 
 const main = async () => {
