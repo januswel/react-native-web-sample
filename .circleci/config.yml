@@ -54,9 +54,12 @@ jobs:
           keys:
             - v3-dependencies-{{ checksum "package.json" }}
             - v3-dependencies-
-      - run: yarn start:server &
-      - run: yarn start:client &
-      - run: sleep 10
+      - run:
+          command: yarn start:server
+          background: true
+      - run:
+          command: yarn start:client
+          background: true
       - run: yarn workspace @januswel/client test:e2e
       - store_artifacts:
           path: modules/client/screenshots
