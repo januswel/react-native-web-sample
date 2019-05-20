@@ -21,6 +21,7 @@ const styles = StyleSheet.create({
 
 export interface Props {
   label: string
+  testID: string
   negative?: boolean
   disabled?: boolean
   onPress: () => void
@@ -28,13 +29,14 @@ export interface Props {
 
 export default (props: Props) =>
   props.disabled ? (
-    <View style={[styles.container, styles.negative]}>
+    <View style={[styles.container, styles.negative]} testID={props.testID}>
       <Text style={styles.label}>{props.label}</Text>
     </View>
   ) : (
     <TouchableOpacity
       style={props.negative ? [styles.container, styles.negative] : styles.container}
       onPress={props.onPress}
+      testID={props.testID}
     >
       <Text style={styles.label}>{props.label}</Text>
     </TouchableOpacity>

@@ -9,8 +9,8 @@ jobs:
       - checkout
       - restore_cache:
           keys:
-            - v3-dependencies-{{ checksum "package.json" }}
-            - v3-dependencies-
+            - v5-dependencies-{{ checksum "package.json" }}
+            - v5-dependencies-
       - run: yarn
       - run: yarn workspace @januswel/domain rebuild
       - save_cache:
@@ -20,7 +20,7 @@ jobs:
             - modules/server/node_modules
             - modules/client/node_modules
             - modules/domain/dist
-          key: v3-dependencies-{{ checksum "package.json" }}
+          key: v5-dependencies-{{ checksum "package.json" }}
   test:
     docker:
       - image: circleci/node:10.15
@@ -29,8 +29,8 @@ jobs:
       - checkout
       - restore_cache:
           keys:
-            - v3-dependencies-{{ checksum "package.json" }}
-            - v3-dependencies-
+            - v5-dependencies-{{ checksum "package.json" }}
+            - v5-dependencies-
       - run: yarn test
   test-server:
     docker:
@@ -40,10 +40,29 @@ jobs:
       - checkout
       - restore_cache:
           keys:
-            - v3-dependencies-{{ checksum "package.json" }}
-            - v3-dependencies-
+            - v5-dependencies-{{ checksum "package.json" }}
+            - v5-dependencies-
       - run: sudo yarn global add dredd@11.0.2
       - run: yarn workspace @januswel/server test
+  test-e2e:
+    docker:
+      - image: circleci/node:10.15-browsers
+    working_directory: ~/repo
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - v5-dependencies-{{ checksum "package.json" }}
+            - v5-dependencies-
+      - run:
+          command: yarn start:server
+          background: true
+      - run:
+          command: yarn start:client
+          background: true
+      - run: yarn workspace @januswel/client test:e2e
+      - store_artifacts:
+          path: modules/client/screenshots
 
 workflows:
   version: 2
@@ -54,5 +73,8 @@ workflows:
           requires:
             - build
       - test-server:
+          requires:
+            - build
+      - test-e2e:
           requires:
             - build

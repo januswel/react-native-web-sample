@@ -8,7 +8,10 @@
   "scripts": {
     "dev": "parcel ./public/index.html",
     "build": "parcel build ./public/index.html",
-    "test": "jest"
+    "test": "yarn test:spec",
+    "test:spec": "jest",
+    "test:e2e": "ts-node-dev --project ../../tsconfig.json e2e/index.ts",
+    "pretest:e2e": "rm -rf screenshots && mkdir -p screenshots"
   },
   "dependencies": {
     "@januswel/domain": "1.0.0",
@@ -23,6 +26,7 @@
   "devDependencies": {
     "@babel/core": "7.4.4",
     "@babel/preset-env": "7.4.4",
+    "@types/puppeteer": "1.12.4",
     "@types/react": "16.8.17",
     "@types/react-dom": "16.8.4",
     "@types/react-native": "0.57.58",
@@ -31,6 +35,8 @@
     "babel-plugin-react-native-web": "0.11.2",
     "metro-react-native-babel-preset": "0.54.1",
     "parcel-bundler": "1.12.3",
-    "react-test-renderer": "16.8.6"
+    "puppeteer": "1.16.0",
+    "react-test-renderer": "16.8.6",
+    "ts-node-dev": "1.0.0-pre.39"
   }
 }

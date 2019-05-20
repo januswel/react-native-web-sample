@@ -45,8 +45,8 @@ export default (props: Props) => {
 
   return (
     <View style={styles.container}>
-      <Title {...title} />
-      <Detail {...detail} />
+      <Title {...title} testID={`input-title-${props.todo.id}`} />
+      <Detail {...detail} testID={`input-detail-${props.todo.id}`} />
       <View style={styles.buttons}>
         <Button
           label="modify"
@@ -54,6 +54,7 @@ export default (props: Props) => {
             props.actions.updateSync(props.todo.id, { title: title.value, detail: detail.value })
             props.setIsEditing(false)
           }}
+          testID={`modify-button-${props.todo.id}`}
         />
         <Button
           label="cancel"
@@ -61,6 +62,7 @@ export default (props: Props) => {
           onPress={() => {
             props.setIsEditing(false)
           }}
+          testID={`cancel-button-${props.todo.id}`}
         />
       </View>
     </View>

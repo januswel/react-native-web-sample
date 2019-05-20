@@ -5,4 +5,4 @@ interface Props {
   style: ViewStyle
 }
 
-export default (props: Props) => <ActivityIndicator style={props.style} size="large" />
+export default (props: Props) => <ActivityIndicator style={props.style} size="large" testID="network-indicator" />

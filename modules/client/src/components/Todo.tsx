@@ -50,12 +50,13 @@ export default (props: Props) => {
   const [isEditing, setIsEditing] = React.useState(false)
 
   return (
-    <View style={styles.container}>
+    <View style={styles.container} testID={`todo-${props.todo.id}`}>
       <View style={styles.buttons}>
         <TouchableOpacity
           onPress={() => {
             setIsEditing(true)
           }}
+          testID={`update-button-${props.todo.id}`}
         >
           <Text>✏️</Text>
         </TouchableOpacity>
@@ -63,6 +64,7 @@ export default (props: Props) => {
           onPress={() => {
             props.actions.removeSync(props.todo.id)
           }}
+          testID={`delete-button-${props.todo.id}`}
         >
           <Text>❌</Text>
         </TouchableOpacity>

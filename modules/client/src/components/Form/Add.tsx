@@ -32,8 +32,8 @@ export default (props: Props) => {
 
   return (
     <View style={styles.container}>
-      <Title {...title} />
-      <Detail {...detail} />
+      <Title {...title} testID="input-title" />
+      <Detail {...detail} testID="input-detail" />
       <Button
         label="add"
         disabled={title.value.length === 0}
@@ -42,6 +42,7 @@ export default (props: Props) => {
           title.onChangeText('')
           detail.onChangeText('')
         }}
+        testID="add-button"
       />
     </View>
   )

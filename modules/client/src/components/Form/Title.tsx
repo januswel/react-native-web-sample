@@ -16,6 +16,7 @@ const styles = StyleSheet.create({
 interface Props {
   value: string
   onChangeText: (newValue: string) => void
+  testID?: string
 }
 
 export default (props: Props) => (
