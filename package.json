@@ -16,7 +16,7 @@
     "test:spec:domain": "yarn workspace @januswel/domain test",
     "test:spec:client": "yarn workspace @januswel/client test",
     "clean": "git clean -Xdf",
-    "postinstall": "cd modules/domain && yarn build"
+    "postinstall": "yarn workspace @januswel/domain rebuild"
   },
   "devDependencies": {
     "@types/jest": "24.0.13",
