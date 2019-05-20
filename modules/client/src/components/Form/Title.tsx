@@ -20,6 +20,6 @@ interface Props {
 
 export default (props: Props) => (
   <Item label="title">
-    <TextInput style={styles.input} {...props} />
+    <TextInput style={styles.input} testID="input-title" {...props} />
   </Item>
 )

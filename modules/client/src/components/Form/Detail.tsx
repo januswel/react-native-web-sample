@@ -20,6 +20,6 @@ interface Props {
 
 export default (props: Props) => (
   <Item label="detail">
-    <TextInput style={styles.input} multiline {...props} />
+    <TextInput style={styles.input} multiline testID="input-detail" {...props} />
   </Item>
 )

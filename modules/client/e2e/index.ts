@@ -18,6 +18,15 @@ const runScenario = async (browser: Puppeteer.Browser) => {
   const page = await openPage(browser, ENTRY_POINT, OPTIONS)
   await page.waitForSelector('[data-testid="add-button"]')
   await page.screenshot({ path: `${SCREENSHOTS_DIR}/initial.png` })
+
+  await page.screenshot({ path: `${SCREENSHOTS_DIR}/initial.png` })
+
+  await page.type('[data-testid="input-title"]', 'e2e')
+  await page.type('[data-testid="input-detail"]', 'use puppeteer')
+  await page.click('[data-testid="add-button"]')
+  await page.waitForSelector('[data-testid="todo-2"]')
+
+  await page.screenshot({ path: `${SCREENSHOTS_DIR}/added.png` })
 }
 
 const main = async () => {

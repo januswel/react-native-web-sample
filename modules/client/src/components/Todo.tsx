@@ -50,7 +50,7 @@ export default (props: Props) => {
   const [isEditing, setIsEditing] = React.useState(false)
 
   return (
-    <View style={styles.container}>
+    <View style={styles.container} testID={`todo-${props.todo.id}`}>
       <View style={styles.buttons}>
         <TouchableOpacity
           onPress={() => {
