@@ -42,6 +42,7 @@ export default (props: Props) => {
           title.onChangeText('')
           detail.onChangeText('')
         }}
+        testID="add-button"
       />
     </View>
   )
