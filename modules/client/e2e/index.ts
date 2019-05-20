@@ -1,48 +1,32 @@
 import * as Puppeteer from 'puppeteer'
 
-//const ENTRY_POINT = 'https://qiita.com/janus_wel'
+import getBrowser from './utils/get-browser'
+import openPage from './utils/open-page'
+
 const ENTRY_POINT = 'http://localhost:1234/'
 const OPTIONS = {
-  WIDTH: 1024,
-  HEIGHT: 600,
-  USER_AGENT:
+  viewport: {
+    width: 1024,
+    height: 600,
+  },
+  userAgent:
     'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.101 Safari/537.36',
 }
 
-const getBrowser = () => Puppeteer.launch({ headless: false })
-const openNewPage = (browser: Puppeteer.Browser) => browser.newPage()
-
-const openPage = async (page: Puppeteer.Page) => {
-  const options = {
-    viewport: {
-      width: OPTIONS.WIDTH,
-      height: OPTIONS.HEIGHT,
-    },
-    userAgent: OPTIONS.USER_AGENT,
-  }
-  await page.emulate(options)
-  await page.goto(ENTRY_POINT)
-}
-
-const runScenario = async (page: Puppeteer.Page) => {
-  await openPage(page)
+const runScenario = async (browser: Puppeteer.Browser) => {
+  const page = await openPage(browser, ENTRY_POINT, OPTIONS)
   await page.waitForSelector('[data-testid="add-button"]')
   await page.screenshot({ path: 'e2e.png' })
 }
 
 const main = async () => {
-  let browser = null
-  try {
-    browser = await getBrowser()
-    const page = await openNewPage(browser)
-    await runScenario(page)
-  } catch (e) {
-    process.stderr.write(e.message)
-  } finally {
-    if (browser) {
-      await browser.close()
-    }
-  }
+  const browser = await getBrowser(true)
+  await runScenario(browser)
+  await browser.close()
 }
 
-main()
+try {
+  main()
+} catch (e) {
+  process.stderr.write(e.message)
+}
