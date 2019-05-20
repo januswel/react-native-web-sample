@@ -44,6 +44,21 @@ jobs:
             - v3-dependencies-
       - run: sudo yarn global add dredd@11.0.2
       - run: yarn workspace @januswel/server test
+  test-e2e:
+    docker:
+      - image: circleci/node:10.15
+    working_directory: ~/repo
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - v3-dependencies-{{ checksum "package.json" }}
+            - v3-dependencies-
+      - run: yarn start:server &
+      - run: yarn start:client &
+      - run: yarn workspace @januswel/client test:e2e
+      - store_artifacts:
+          path: modules/client/screenshots
 
 workflows:
   version: 2
@@ -54,5 +69,8 @@ workflows:
           requires:
             - build
       - test-server:
+          requires:
+            - build
+      - test-e2e:
           requires:
             - build

@@ -8,7 +8,8 @@
   "scripts": {
     "dev": "parcel ./public/index.html",
     "build": "parcel build ./public/index.html",
-    "test": "jest",
+    "test": "yarn test:spec",
+    "test:spec": "jest",
     "test:e2e": "ts-node-dev --project ../../tsconfig.json e2e/index.ts",
     "pretest:e2e": "rm -rf screenshots && mkdir -p screenshots"
   },
