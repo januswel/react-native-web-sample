@@ -15,32 +15,34 @@ const OPTIONS = {
 }
 const SCREENSHOTS_DIR = 'screenshots'
 
+const buildSelector = (id: string) => `[data-testid="${id}"]`
+
 const runScenario = async (browser: Puppeteer.Browser) => {
   const page = await openPage(browser, ENTRY_POINT, OPTIONS)
-  await page.waitForSelector('[data-testid="add-button"]')
+  await page.waitForSelector(buildSelector('add-button'))
   await page.screenshot({ path: `${SCREENSHOTS_DIR}/initial.png` })
 
   await page.screenshot({ path: `${SCREENSHOTS_DIR}/initial.png` })
 
-  await page.type('[data-testid="input-title"]', 'e2e')
-  await page.type('[data-testid="input-detail"]', 'use puppeteer')
-  await page.click('[data-testid="add-button"]')
-  await page.waitForSelector('[data-testid="todo-2"]')
+  await page.type(buildSelector('input-title'), 'e2e')
+  await page.type(buildSelector('input-detail'), 'use puppeteer')
+  await page.click(buildSelector('add-button'))
+  await page.waitForSelector(buildSelector('todo-2'))
 
   await page.screenshot({ path: `${SCREENSHOTS_DIR}/added.png` })
 
-  await page.click('[data-testid="update-button-2"]')
-  await clearInput(page, '[data-testid="input-title-2"]')
-  await page.type('[data-testid="input-title-2"]', 'write an E2E test scenario')
-  await clearInput(page, '[data-testid="input-detail-2"]')
-  await page.type('[data-testid="input-detail-2"]', 'use puppeteer\nrefer: https://pptr.dev/')
-  await page.click('[data-testid="modify-button-2"]')
-  await page.waitForSelector('[data-testid="todo-2"]')
+  await page.click(buildSelector('update-button-2'))
+  await clearInput(page, buildSelector('input-title-2'))
+  await page.type(buildSelector('input-title-2'), 'write an E2E test scenario')
+  await clearInput(page, buildSelector('input-detail-2'))
+  await page.type(buildSelector('input-detail-2'), 'use puppeteer\nrefer: https://pptr.dev/')
+  await page.click(buildSelector('modify-button-2'))
+  await page.waitForSelector(buildSelector('todo-2'))
 
   await page.screenshot({ path: `${SCREENSHOTS_DIR}/updated.png` })
 
-  await page.click('[data-testid="delete-button-1"]')
-  await page.waitForSelector('[data-testid="network-indicator"]', { hidden: true })
+  await page.click(buildSelector('delete-button-1'))
+  await page.waitForSelector(buildSelector('network-indicator'), { hidden: true })
 
   await page.screenshot({ path: `${SCREENSHOTS_DIR}/delated.png` })
 }
