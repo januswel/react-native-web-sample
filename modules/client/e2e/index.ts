@@ -52,13 +52,13 @@ const runScenario = async (browser: Puppeteer.Browser) => {
   await takeScreenshot(page, 'opened')
 
   await operations.add(page)
-  await takeScreenshot(page, 'added.png')
+  await takeScreenshot(page, 'added')
 
   await operations.update(page)
-  await takeScreenshot(page, 'updated.png')
+  await takeScreenshot(page, 'updated')
 
   await operations.delete(page)
-  await takeScreenshot(page, 'delated.png')
+  await takeScreenshot(page, 'delated')
 }
 
 const main = async () => {
