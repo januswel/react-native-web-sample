@@ -15,6 +15,9 @@ const OPTIONS = {
 }
 const SCREENSHOTS_DIR = 'screenshots'
 
+const takeScreenshot = async (page: Puppeteer.Page, name: string) => {
+  await page.screenshot({ path: `${SCREENSHOTS_DIR}/${name}.png` })
+}
 const buildSelector = (id: string) => `[data-testid="${id}"]`
 
 const operations = {
@@ -46,16 +49,16 @@ const operations = {
 
 const runScenario = async (browser: Puppeteer.Browser) => {
   const page = await operations.open(browser)
-  await page.screenshot({ path: `${SCREENSHOTS_DIR}/opened.png` })
+  await takeScreenshot(page, 'opened')
 
   await operations.add(page)
-  await page.screenshot({ path: `${SCREENSHOTS_DIR}/added.png` })
+  await takeScreenshot(page, 'added.png')
 
   await operations.update(page)
-  await page.screenshot({ path: `${SCREENSHOTS_DIR}/updated.png` })
+  await takeScreenshot(page, 'updated.png')
 
   await operations.delete(page)
-  await page.screenshot({ path: `${SCREENSHOTS_DIR}/delated.png` })
+  await takeScreenshot(page, 'delated.png')
 }
 
 const main = async () => {
