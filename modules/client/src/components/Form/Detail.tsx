@@ -16,10 +16,11 @@ const styles = StyleSheet.create({
 interface Props {
   value: string
   onChangeText: (newValue: string) => void
+  testID?: string
 }
 
 export default (props: Props) => (
   <Item label="detail">
-    <TextInput style={styles.input} multiline testID="input-detail" {...props} />
+    <TextInput style={styles.input} multiline {...props} />
   </Item>
 )

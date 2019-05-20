@@ -56,6 +56,7 @@ export default (props: Props) => {
           onPress={() => {
             setIsEditing(true)
           }}
+          testID={`update-button-${props.todo.id}`}
         >
           <Text>✏️</Text>
         </TouchableOpacity>
@@ -63,6 +64,7 @@ export default (props: Props) => {
           onPress={() => {
             props.actions.removeSync(props.todo.id)
           }}
+          testID={`delete-button-${props.todo.id}`}
         >
           <Text>❌</Text>
         </TouchableOpacity>

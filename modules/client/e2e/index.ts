@@ -2,6 +2,7 @@ import * as Puppeteer from 'puppeteer'
 
 import getBrowser from './utils/get-browser'
 import openPage from './utils/open-page'
+import clearInput from './utils/clear-input'
 
 const ENTRY_POINT = 'http://localhost:1234/'
 const OPTIONS = {
@@ -27,6 +28,16 @@ const runScenario = async (browser: Puppeteer.Browser) => {
   await page.waitForSelector('[data-testid="todo-2"]')
 
   await page.screenshot({ path: `${SCREENSHOTS_DIR}/added.png` })
+
+  await page.click('[data-testid="update-button-2"]')
+  await clearInput(page, '[data-testid="input-title-2"]')
+  await page.type('[data-testid="input-title-2"]', 'write an E2E test scenario')
+  await clearInput(page, '[data-testid="input-detail-2"]')
+  await page.type('[data-testid="input-detail-2"]', 'use puppeteer\nrefer: https://pptr.dev/')
+  await page.click('[data-testid="modify-button-2"]')
+  await page.waitForSelector('[data-testid="todo-2"]')
+
+  await page.screenshot({ path: `${SCREENSHOTS_DIR}/updated.png` })
 }
 
 const main = async () => {
