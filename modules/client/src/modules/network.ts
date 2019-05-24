@@ -1,7 +1,7 @@
 import createReducer from './create-reducer'
 
-export const SEND_REQUEST = 'network/send-request'
-export const RECEIVE_RESPONSE = 'network/receive-request'
+export const SEND_REQUEST = 'network/send-request' as const
+export const RECEIVE_RESPONSE = 'network/receive-request' as const
 
 type Types = typeof SEND_REQUEST | typeof RECEIVE_RESPONSE
 
@@ -11,10 +11,10 @@ export const createInitialState = (): State => ({
 })
 
 export const sendRequest = () => ({
-  type: SEND_REQUEST as typeof SEND_REQUEST,
+  type: SEND_REQUEST,
 })
 export const receiveResponse = () => ({
-  type: RECEIVE_RESPONSE as typeof RECEIVE_RESPONSE,
+  type: RECEIVE_RESPONSE,
 })
 
 export type Action = ReturnType<typeof sendRequest> | ReturnType<typeof receiveResponse>
