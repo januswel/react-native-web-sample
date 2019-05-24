@@ -1,7 +1,7 @@
 import createReducer from './create-reducer'
 
-export const SET_ERROR = 'error/set'
-export const CLEAR_ERROR = 'clear/error'
+export const SET_ERROR = 'error/set' as const
+export const CLEAR_ERROR = 'clear/error' as const
 
 type Types = typeof SET_ERROR | typeof CLEAR_ERROR
 
@@ -11,14 +11,14 @@ export const createInitialState = (): State => ({
 })
 
 export const setError = (error: Error) => ({
-  type: SET_ERROR as typeof SET_ERROR,
+  type: SET_ERROR,
   error: true,
   payload: {
     error,
   },
 })
 export const clearError = () => ({
-  type: CLEAR_ERROR as typeof CLEAR_ERROR,
+  type: CLEAR_ERROR,
 })
 
 type SetErrorAction = ReturnType<typeof setError>
